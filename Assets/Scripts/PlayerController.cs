@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] float movementInertia = 1f;
     [SerializeField] float rotationInertia = 1f;
+    [SerializeField] Vector3 gravity = new Vector3(0, -9.81f, 0);
 
     IInputProvider input;
     CharacterController controller;
@@ -37,6 +38,10 @@ public class PlayerController : MonoBehaviour
     void VelocityUpdate(Vector3 newTargetVelocity, float delta)
     {
         velocity = Vector3.Lerp(velocity, newTargetVelocity, Mathf.Pow(delta, movementInertia));
+        if (!controller.isGrounded)
+        {
+            velocity += gravity * delta;
+        }
         controller.Move(velocity);
     }
     void RotationUpdate(Quaternion? newTargetRotation, float delta)
