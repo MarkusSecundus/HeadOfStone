@@ -1,9 +1,29 @@
+using Assets.Scripts.DamageSystem;
+using MarkusSecundus.PhysicsSwordfight.Utils.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace MarkusSecundus.Utils.Datastructs
 {
+
+    public struct DefaultValWeakTable<TKey, TValue> where TKey: class where TValue : class
+    {
+        public DefaultValWeakTable(Func<TKey, TValue> supplier) => (Cache, Supplier) = (new(), supplier);
+        public readonly ConditionalWeakTable<TKey, TValue> Cache;
+        public readonly Func<TKey, TValue> Supplier;
+
+        public TValue GetOrDefault(TKey key)
+        {
+
+            if (Cache.TryGetValue(key, out var ret)) return ret;
+            ret = Supplier(key);
+            Cache.Add(key, ret);
+            return ret;
+        }
+    }
+
 
     /// <summary>
     /// Decorator for IDictionary. Adds the functionality of creating default value when none is present but is being asked for.
