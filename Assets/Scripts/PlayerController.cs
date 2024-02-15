@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movementInertia = 1f;
     [SerializeField] float rotationInertia = 1f;
     [SerializeField] Vector3 gravity = new Vector3(0, -9.81f, 0);
+    [SerializeField] Transform bodyToRotate;
 
     IInputProvider input;
     CharacterController controller;
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
     void RotationUpdate(Quaternion? newTargetRotation, float delta)
     {
         if (newTargetRotation is not Quaternion newRotation) return;
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Mathf.Pow(delta, rotationInertia));
+        bodyToRotate.rotation = Quaternion.Lerp(bodyToRotate.rotation, newRotation, Mathf.Pow(delta, rotationInertia));
     }
 
     Vector3 GetTargetVelocity()
