@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     [SerializeField] float movementSpeed;
+    [SerializeField] float movementInertia = 1f;
+    [SerializeField] float rotationInertia = 1f;
 
     IInputProvider input;
     CharacterController controller;
@@ -19,22 +22,41 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
+
+    Vector3 velocity = Vector3.zero;
     void Update()
     {
         var delta = Time.deltaTime;
-        Vector3 toMove = Vector3.forward * input.GetAxisRaw(InputAxis.Vertical)
-                       + Vector3.right * input.GetAxisRaw(InputAxis.Horizontal);
-        toMove = toMove.normalized * movementSpeed * delta;
+        VelocityUpdate(GetTargetVelocity(), delta);
+        RotationUpdate(GetTargetRotation(), delta);
+    }
 
+
+
+    void VelocityUpdate(Vector3 newTargetVelocity, float delta)
+    {
+        velocity = Vector3.Lerp(velocity, newTargetVelocity, Mathf.Pow(delta, movementInertia));
+        controller.Move(velocity);
+    }
+    void RotationUpdate(Quaternion? newTargetRotation, float delta)
+    {
+        if (newTargetRotation is not Quaternion newRotation) return;
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Mathf.Pow(delta, rotationInertia));
+    }
+
+    Vector3 GetTargetVelocity()
+    {
+        Vector3 targetVelocity = Vector3.forward * input.GetAxisRaw(InputAxis.Vertical)
+                               + Vector3.right * input.GetAxisRaw(InputAxis.Horizontal);
+        return targetVelocity.normalized * movementSpeed;
+    }
+    Quaternion? GetTargetRotation()
+    {
         var inputRay = input.GetMouseRay();
-        if(inputRay.Intersect(new Plane(Vector3.up, transform.position.y)) is Vector3 lookPoint)
-        {
-            var rotation = Quaternion.LookRotation((lookPoint - transform.position).With(y:0));
-            transform.rotation = rotation;
-        }
-
-
-        controller.Move(toMove);
+        if (inputRay.Intersect(new Plane(Vector3.up, transform.position.y)) is Vector3 lookPoint)
+            return Quaternion.LookRotation((lookPoint - transform.position).With(y: 0));
+        return null;
     }
 
 
