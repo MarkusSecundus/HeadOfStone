@@ -60,5 +60,16 @@ namespace MarkusSecundus.PhysicsSwordfight.Utils.Geometry
             //if (!point.Distance(sphere.Center).IsCloseTo(sphere.Radius)) throw new ArgumentException($"The point doesn't lay on the sphere");
             return new Plane(point - sphere.Center, point);
         }
+
+        public static Vector3? Intersect(this Ray r, Plane p)
+        {
+            var divider = (p.normal.x*r.direction.x + p.normal.y*r.direction.y + p.normal.z*r.direction.z);
+            if (divider == 0)
+                return null;
+
+            var t= -(p.normal.x * r.origin.x + p.normal.y * r.origin.y + p.normal.z * r.origin.z + p.distance) / divider;
+
+            return r.origin + t*r.direction;
+        }
     }
 }

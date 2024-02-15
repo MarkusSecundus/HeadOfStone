@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Assets.Scripts.IO
     public class BasicInputProvider : MonoBehaviour, IInputProvider
     {
         [SerializeField] Camera _camera;
-        new Camera camera => _camera ??= Camera.main;
+        new Camera camera => _camera = _camera.IfNil(Camera.main);
 
         public float GetAxis(InputAxis axis) => Input.GetAxis(axis.GetName());
         public float GetAxisRaw(InputAxis axis) => Input.GetAxisRaw(axis.GetName());
