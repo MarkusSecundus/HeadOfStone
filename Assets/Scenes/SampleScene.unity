@@ -5286,7 +5286,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 9.14
+  m_Radius: 14.77
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &680047073
 MonoBehaviour:
@@ -6036,6 +6036,77 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807803611}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &813471774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813471775}
+  - component: {fileID: 813471776}
+  - component: {fileID: 813471777}
+  m_Layer: 0
+  m_Name: Damager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &813471775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813471774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0.897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1164629020}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &813471776
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813471774}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &813471777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813471774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8caa809126486e247870ae004f338cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 20
+  DamageType: 2
+  OnAttacked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &826522354
 GameObject:
   m_ObjectHideFlags: 0
@@ -7910,6 +7981,8 @@ GameObject:
   - component: {fileID: 1164629022}
   - component: {fileID: 1164629023}
   - component: {fileID: 1164629024}
+  - component: {fileID: 1164629026}
+  - component: {fileID: 1164629025}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -7955,6 +8028,7 @@ Transform:
   m_Children:
   - {fileID: 3171472743081452764}
   - {fileID: 680047071}
+  - {fileID: 813471775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1164629021
@@ -8018,8 +8092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7d3b2e3e4271141a0a8c0f18fa37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackCenter: {fileID: 0}
-  AttackRadius: 2
+  _damager: {fileID: 813471777}
 --- !u!114 &1164629024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8033,6 +8106,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Faction>k__BackingField: 2
+--- !u!114 &1164629025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164629018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ce7d33520e8d2448a749474397a033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAttacked:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1164629026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164629018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6e9f7c1f8f9f84a8c14bc9572102a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxHP>k__BackingField: 100
+  <HP>k__BackingField: 0
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1188357136
 GameObject:
   m_ObjectHideFlags: 0

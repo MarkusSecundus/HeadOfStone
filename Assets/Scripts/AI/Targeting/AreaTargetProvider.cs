@@ -1,4 +1,4 @@
-﻿using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
+﻿using MarkusSecundus.PhysicsSwordfight.PhysicsUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Targeting
 {
+
     public class AreaTargetProvider : MonoBehaviour, ITargetProvider
     {
         public Transform Target => _target?_target.transform:null;
@@ -20,30 +21,26 @@ namespace Assets.Scripts.AI.Targeting
         void Start()
         {
             ownFaction = FactionMember.Get(this);
+            activeTargets = new(FactionMember.Get, target => !ReferenceEquals(target, ownFaction) && (CanAttackOwnFaction || target.Faction != ownFaction.Faction));
         }
 
-        HashSet<FactionMember> activeTargets = new();
+        ColliderActivityInfo<FactionMember> activeTargets;
 
         private void OnTriggerEnter(Collider other)
         {
-            var target = FactionMember.Get(other);
-            if (!target || ReferenceEquals(target, ownFaction) || (!CanAttackOwnFaction && target.Faction == ownFaction.Faction))
-                return;
-            activeTargets.Add(target);
-            if (!_target)
+            var target = activeTargets.Enter(other);
+            if (target && !_target)
                 _target = target;
         }
         private void OnTriggerExit(Collider other)
         {
-            var target = FactionMember.Get(other);
-            if (!target || !activeTargets.Contains(target))
-                return;
+            var target = activeTargets.Exit(other);
+            if (!target) return;
 
-            activeTargets.Remove(target);
-            if (_target == target || !_target.gameObject.activeInHierarchy)
+            if (!_target || _target == target || !_target.gameObject.activeInHierarchy)
             {
                 _target = null;
-                foreach (var candidate in activeTargets)
+                foreach (var candidate in activeTargets.Active)
                 {
                     if (!candidate.gameObject.activeInHierarchy) continue;
                     _target = candidate;

@@ -37,7 +37,6 @@ public class ProjectileShooter : MonoBehaviour
         bullet.gameObject.SetActive(true);
 
         var shootForce = (ShootDirection.position - transform.position).normalized * ShootForce;
-        Debug.Log($"Shoot force: {shootForce}", this);
         bullet.AddForce(shootForce, ForceMode.Impulse); 
     }
 }
