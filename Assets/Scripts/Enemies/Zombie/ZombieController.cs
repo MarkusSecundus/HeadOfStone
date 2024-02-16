@@ -1,3 +1,4 @@
+using Assets.Scripts.AI.Targeting;
 using Assets.Scripts.DamageSystem;
 using Assets.Scripts.Utils.Extensions;
 using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
@@ -8,28 +9,35 @@ using UnityEngine.AI;
 
 public class ZombieController : MonoBehaviour
 {
-    [SerializeField] Transform TargetEnemy;
     [SerializeField] Transform AttackCenter;
     [SerializeField] float AttackRadius = 1f;
-    
 
-    NavMeshAgent navAgent;
-    ZombieAnimationLogic animationLogic;
+    ITargetProvider _targetProvider;
+
+    NavMeshAgent _navAgent;
+    ZombieAnimationLogic _animationLogic;
     private void Start()
     {
-        navAgent = GetComponent<NavMeshAgent>();
-        animationLogic = GetComponentInChildren<ZombieAnimationLogic>();
-        animationLogic.OnAttackSignal.AddListener(PerformAttack);
+        _navAgent = GetComponent<NavMeshAgent>();
+        _targetProvider = GetComponentInChildren<ITargetProvider>();
+        _animationLogic = GetComponentInChildren<ZombieAnimationLogic>();
+        _animationLogic.OnAttackSignal.AddListener(PerformAttack);
         if (!AttackCenter) AttackCenter = this.transform;
     }
     void Update()
     {
-        navAgent.SetDestination(TargetEnemy.position);
-        float movementSpeed = navAgent.velocity.magnitude;
-        float remainingDistance = navAgent.GetRemainingDistanceUntilStop();
+        if (_targetProvider.Target)
+        {
+            _navAgent.isStopped = false;
+            _navAgent.SetDestination(_targetProvider.Target.position);
+        }
+        else
+            _navAgent.isStopped = true;
+        float movementSpeed = _navAgent.velocity.magnitude;
+        float remainingDistance = _navAgent.GetRemainingDistanceUntilStop();
 
-        animationLogic.AnimationMovementSpeed = movementSpeed;
-        animationLogic.AnimationAttackingState = remainingDistance <= Mathf.Epsilon;
+        _animationLogic.AnimationMovementSpeed = movementSpeed;
+        _animationLogic.AnimationAttackingState = _targetProvider.Target && remainingDistance <= Mathf.Epsilon;
     }
 
     void PerformAttack()
@@ -39,10 +47,8 @@ public class ZombieController : MonoBehaviour
         {
             var armor = IArmorPiece.Get(collider);
             if (armor.IsNil() || false&&!attackedEntities.Add(armor.Damageable))
-            {
-                Debug.Log($"Cannot attack collider {collider.name}", this);
                 continue;
-            }
+
             Debug.Log($"Attack: {collider.name} -> {armor} -> {armor.Damageable.name}");
         }
     }

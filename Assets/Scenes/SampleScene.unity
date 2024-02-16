@@ -741,6 +741,8 @@ GameObject:
   m_Component:
   - component: {fileID: 134099175}
   - component: {fileID: 134099176}
+  - component: {fileID: 134099178}
+  - component: {fileID: 134099177}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -799,6 +801,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &134099177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134099174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
+--- !u!208 &134099178
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134099174}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1.24, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &138586812
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,6 +5234,73 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675961836}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &680047070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680047071}
+  - component: {fileID: 680047072}
+  - component: {fileID: 680047073}
+  m_Layer: 0
+  m_Name: Targetting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &680047071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680047070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1164629020}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &680047072
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680047070}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 9.14
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &680047073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680047070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ac01953ff8bbe49862298f3025dd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanAttackOwnFaction: 0
 --- !u!1 &723223701
 GameObject:
   m_ObjectHideFlags: 0
@@ -7202,6 +7306,7 @@ GameObject:
   - component: {fileID: 1071705410}
   - component: {fileID: 1071705411}
   - component: {fileID: 1071705412}
+  - component: {fileID: 1071705413}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -7324,7 +7429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15259e1d424774f47b7a3ae17953db99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.18
+  movementSpeed: 0.3
   movementInertia: 0.4
   rotationInertia: 0.3
   gravity: {x: 0, y: -9.81, z: 0}
@@ -7412,6 +7517,19 @@ MonoBehaviour:
   OnAttacked:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1071705413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071705402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c55c666d3b322747999aca529a0fde2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Faction>k__BackingField: 0
 --- !u!1 &1076714619
 GameObject:
   m_ObjectHideFlags: 0
@@ -7791,6 +7909,7 @@ GameObject:
   - component: {fileID: 1164629021}
   - component: {fileID: 1164629022}
   - component: {fileID: 1164629023}
+  - component: {fileID: 1164629024}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -7835,6 +7954,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3171472743081452764}
+  - {fileID: 680047071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1164629021
@@ -7898,9 +8018,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7d3b2e3e4271141a0a8c0f18fa37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetEnemy: {fileID: 1071705406}
   AttackCenter: {fileID: 0}
   AttackRadius: 2
+--- !u!114 &1164629024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164629018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c55c666d3b322747999aca529a0fde2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Faction>k__BackingField: 2
 --- !u!1 &1188357136
 GameObject:
   m_ObjectHideFlags: 0
