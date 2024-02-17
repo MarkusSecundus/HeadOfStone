@@ -29,7 +29,7 @@ namespace Assets.Scripts.DamageSystem.Damagers
             var declaration = new AttackDeclaration { Attacker = this, Damage = Damage, Type = DamageType };
             foreach(var target in _activeTargets.Active)
             {
-                if(target.Damageable.gameObject.activeInHierarchy)
+                if(target.IsNotNil() && target.Damageable && target.Damageable.gameObject.activeInHierarchy)
                     target.Attack(declaration);
             }
         }

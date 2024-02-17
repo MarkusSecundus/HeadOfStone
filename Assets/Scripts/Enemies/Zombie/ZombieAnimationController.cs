@@ -27,7 +27,7 @@ public class ZombieAnimationController : MonoBehaviour
 
     public void Die()
     {
-        animator.SetInteger(AnimatorVariables.DeathType, Random.Range(1, AnimatorVariables.DeathTypesCount));
+        animator.SetInteger(AnimatorVariables.DeathType, 2/* Random.Range(1, AnimatorVariables.DeathTypesCount + 1)*/);
         State = AnimationState.Die; 
     }
 
