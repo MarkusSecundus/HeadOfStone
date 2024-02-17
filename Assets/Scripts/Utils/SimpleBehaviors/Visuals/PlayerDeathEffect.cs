@@ -44,8 +44,8 @@ namespace MarkusSecundus.PhysicsSwordfight.Cosmetics
             transform.DOScale(CameraDestination.localScale, MovementDuration);
             transform.DORotateQuaternion(CameraDestination.rotation, MovementDuration);
             transform.DOMove(CameraDestination.position, MovementDuration);
-            this.PerformWithDelay(OnPopup.Invoke, popupDuration);
-            this.PerformWithDelay(() => { Destroy(transform.gameObject); Destroy(CameraDestination.gameObject); }, deathDuration);
+            this.InvokeWithDelay(OnPopup.Invoke, popupDuration);
+            this.InvokeWithDelay(() => { Destroy(transform.gameObject); Destroy(CameraDestination.gameObject); }, deathDuration);
         }
     }
 }

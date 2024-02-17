@@ -35,7 +35,7 @@ namespace MarkusSecundus.PhysicsSwordfight.Actions
         /// </summary>
         public void StartTimer()
         {
-            this.PerformWithDelay(ToRun.Invoke, DelaySeconds);
+            this.InvokeWithDelay(ToRun.Invoke, DelaySeconds);
         }
     }
 }

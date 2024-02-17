@@ -11,7 +11,7 @@ namespace Assets.Scripts.AI.Targeting
 
     public class AreaTargetProvider : MonoBehaviour, ITargetProvider
     {
-        public Transform Target => _target?_target.transform:null;
+        public Transform Target => _target ==null ?null:(_target && _target.isActiveAndEnabled?_target.transform:(_target = _getNextTarget())?.transform);
         FactionMember _target;
 
         [SerializeField] bool CanAttackOwnFaction = false;
@@ -38,15 +38,14 @@ namespace Assets.Scripts.AI.Targeting
             if (!target) return;
 
             if (!_target || _target == target || !_target.gameObject.activeInHierarchy)
-            {
-                _target = null;
-                foreach (var candidate in activeTargets.Active)
-                {
-                    if (!candidate.gameObject.activeInHierarchy) continue;
-                    _target = candidate;
-                    break;
-                }
-            }
+                _target = _getNextTarget();
+        }
+        FactionMember _getNextTarget()
+        {
+            foreach (var candidate in activeTargets.Active)
+                if (candidate.gameObject.activeInHierarchy)
+                    return candidate;
+            return null;
         }
     }
 }

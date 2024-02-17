@@ -22,7 +22,7 @@ namespace MarkusSecundus.PhysicsSwordfight.Utils.Extensions
         /// <param name="self">Component responsible for performing the action</param>
         /// <param name="toPerform">Action to perform</param>
         /// <param name="toYield">Yield-object defining the delay</param>
-        public static void PerformWithDelay(this MonoBehaviour self, System.Action toPerform, object toYield)
+        public static void InvokeWithDelay(this MonoBehaviour self, System.Action toPerform, object toYield)
         {
             self.StartCoroutine(impl());
             IEnumerator impl()
@@ -31,15 +31,15 @@ namespace MarkusSecundus.PhysicsSwordfight.Utils.Extensions
                 toPerform();
             }
         }
+
         /// <summary>
         /// Perform given action with given delay in seconds.
         /// </summary>
         /// <param name="self">Component responsible for performing the action</param>
         /// <param name="toPerform">Action to perform</param>
         /// <param name="delay">Delay in seconds until the action is performed</param>
-        public static void PerformWithDelay(this MonoBehaviour self, System.Action toPerform, float delay)
-            => self.PerformWithDelay(toPerform, new WaitForSeconds(delay));
-
+        public static void InvokeWithDelay(this MonoBehaviour self, System.Action toPerform, float delay)
+            => self.InvokeWithDelay(toPerform, new WaitForSeconds(delay));
         /// <summary>
         /// Create a new instance of given gameobject making sure its transform is preserved
         /// </summary>

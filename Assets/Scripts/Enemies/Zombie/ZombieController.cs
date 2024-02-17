@@ -15,17 +15,18 @@ public class ZombieController : MonoBehaviour
     ITargetProvider _targetProvider;
 
     NavMeshAgent _navAgent;
-    ZombieAnimationLogic _animationLogic;
+    ZombieAnimationController _animationLogic;
     private void Start()
     {
         _navAgent = GetComponent<NavMeshAgent>();
         _targetProvider = GetComponentInChildren<ITargetProvider>();
-        _animationLogic = GetComponentInChildren<ZombieAnimationLogic>();
+        _animationLogic = GetComponentInChildren<ZombieAnimationController>();
         _animationLogic.OnAttackSignal.AddListener(_damager.PerformAttack);
     }
+    bool isDead = false;
     void Update()
     {
-        if (_targetProvider.Target)
+        if (!isDead && _targetProvider.Target)
         {
             _navAgent.isStopped = false;
             _navAgent.SetDestination(_targetProvider.Target.position);
@@ -35,7 +36,11 @@ public class ZombieController : MonoBehaviour
         float movementSpeed = _navAgent.velocity.magnitude;
         float remainingDistance = _navAgent.GetRemainingDistanceUntilStop();
 
-        _animationLogic.AnimationMovementSpeed = movementSpeed;
-        _animationLogic.AnimationAttackingState = _targetProvider.Target && remainingDistance <= Mathf.Epsilon;
+        _animationLogic.UpdateAnimation((_targetProvider.Target && remainingDistance <= Mathf.Epsilon), movementSpeed);
+    }
+    public void Die()
+    {
+        isDead = true;
+        _animationLogic.Die();
     }
 }
