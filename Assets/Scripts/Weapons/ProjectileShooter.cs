@@ -12,16 +12,21 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] Rigidbody BulletPrototype;
 
     [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
-    IInputProvider input;
+    IInputProvider _input;
+    WeaponDescriptor _weaponDescriptor;
     private void Start()
     {
-        input = IInputProvider.Get(this);
+        _input = IInputProvider.Get(this);
+        _weaponDescriptor = GetComponentInParent<WeaponDescriptor>();
     }
 
     private void Update()
     {
-        if (input.GetKeyDown(KeyToShoot))
-            DoShoot();
+        if (_input.GetKeyDown(KeyToShoot))
+            if (_weaponDescriptor.AddAmmo(-1))
+                DoShoot();
+            else
+                Debug.Log($"Insufficient ammo! ({_weaponDescriptor.CurrentAmmo})", this);
     }
 
     double _nextPermittedShotTime = double.NegativeInfinity;
@@ -36,7 +41,10 @@ public class ProjectileShooter : MonoBehaviour
         bullet.transform.rotation = BulletPrototype.transform.rotation;
         bullet.gameObject.SetActive(true);
 
-        var shootForce = (ShootDirection.position - transform.position).normalized * ShootForce;
-        bullet.AddForce(shootForce, ForceMode.Impulse); 
+        if (ShootDirection && !bullet.isKinematic)
+        {
+            var shootForce = (ShootDirection.position - transform.position).normalized * ShootForce;
+            bullet.AddForce(shootForce, ForceMode.Impulse);
+        }
     }
 }

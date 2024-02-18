@@ -74,7 +74,7 @@ public class Damageable : MonoBehaviour
 
         var info = HealthChangeInfo.Compute(this, amount);
         this.HP = info.ResultHP;
-        Debug.Log($"{name} damaged for {amount}({info.ActualDeltaHP}) HP -> now has {this.HP} HP (originally had {info.OriginalHP})");
+        //Debug.Log($"{name} damaged for {amount}({info.ActualDeltaHP}) HP -> now has {this.HP} HP (originally had {info.OriginalHP})");
 
         OnUpdate?.Invoke(info);
         @event?.Invoke(info);

@@ -30,11 +30,11 @@ namespace Assets.Scripts.Utils.SimpleBehaviors.GameObjects
         public void ScheduleDestroy(float untilDestroy)
         {
             if (untilDestroy < -0f) DestroyImmediate();
-            HelperSingleton.Instance.InvokeWithDelay(DestroyImmediate, untilDestroy);
+            HelperSingleton.Instance.InvokeWithDelay(() => { if (gameObject) Destroy(gameObject); }, untilDestroy);
         }
         public void ScheduleDestroyNextFrame()
         {
-            HelperSingleton.Instance.InvokeWithDelay(DestroyImmediate, null);
+            HelperSingleton.Instance.InvokeWithDelay(() => { if (gameObject) Destroy(gameObject); }, null);
         }
     }
 }

@@ -531,6 +531,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHP>k__BackingField: 40
   <HP>k__BackingField: 0
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   OnDamaged:
     m_PersistentCalls:
       m_Calls: []
@@ -6243,8 +6246,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8168781, y: 1, z: 1.1845989}
-  m_Center: {x: 0.042034507, y: 0, z: 0.09229946}
+  m_Size: {x: 1.2933187, y: 1, z: 1.1845989}
+  m_Center: {x: -0.03084588, y: 0, z: 0.09229946}
 --- !u!1 &8374258624698201321
 GameObject:
   m_ObjectHideFlags: 0
