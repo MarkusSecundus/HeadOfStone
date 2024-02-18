@@ -17,6 +17,9 @@ public class Damageable : MonoBehaviour
     [SerializeField] UnityEvent<HealthChangeInfo> OnDamaged;
     [SerializeField] UnityEvent<HealthChangeInfo> OnHealed;
     [SerializeField] UnityEvent<HealthChangeInfo> OnDeath;
+    [SerializeField] UnityEvent OnDestroyed;
+
+    private void OnDestroy() => OnDestroyed?.Invoke();
 
     private void Awake()
     {

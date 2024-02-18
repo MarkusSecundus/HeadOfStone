@@ -14,6 +14,9 @@ namespace MarkusSecundus.PhysicsSwordfight.PhysicsUtils
     /// </summary>
     public class CallbackedTrigger : MonoBehaviour
     {
+        public bool ListenToTriggerEvents = true;
+        public bool ListenToCollisionEvents = false;
+
         /// <summary>
         /// Action to be invoked when <c>OnTriggerEnter</c> message is received
         /// </summary>
@@ -60,7 +63,22 @@ namespace MarkusSecundus.PhysicsSwordfight.PhysicsUtils
             return this;
         }
 
-        void OnTriggerEnter(Collider other) => OnEnter?.Invoke(other);
-        void OnTriggerExit(Collider other) => OnExit?.Invoke(other);
+        void OnTriggerEnter(Collider other)
+        {
+            if(ListenToTriggerEvents) OnEnter?.Invoke(other);
+        }
+        void OnTriggerExit(Collider other)
+        {
+            if(ListenToTriggerEvents) OnExit?.Invoke(other);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(ListenToCollisionEvents) OnEnter?.Invoke(collision.collider);
+        }
+        private void OnCollisionExit(Collision collision)
+        {
+            if(ListenToCollisionEvents) OnExit?.Invoke(collision.collider);
+        }
     }
 }

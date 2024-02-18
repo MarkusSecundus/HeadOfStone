@@ -22,11 +22,19 @@ namespace Assets.Scripts.Utils.SimpleBehaviors.GameObjects
         {
             var _ = HelperSingleton.Instance;
         }
-        public void DestroyImmediate() => Destroy(gameObject);
+        public void DestroyImmediate()
+        {
+            if(gameObject)
+                Destroy(gameObject);
+        }
         public void ScheduleDestroy(float untilDestroy)
         {
             if (untilDestroy < -0f) DestroyImmediate();
             HelperSingleton.Instance.InvokeWithDelay(DestroyImmediate, untilDestroy);
+        }
+        public void ScheduleDestroyNextFrame()
+        {
+            HelperSingleton.Instance.InvokeWithDelay(DestroyImmediate, null);
         }
     }
 }
