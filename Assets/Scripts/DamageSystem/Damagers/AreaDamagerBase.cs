@@ -30,16 +30,21 @@ namespace Assets.Scripts.DamageSystem.Damagers
             foreach(var target in _activeTargets.Active)
             {
                 if(target.IsNotNil() && target.Damageable && target.Damageable.gameObject.activeInHierarchy)
+                {
+                    Debug.Log($"{name}: Attacking {target.Damageable.name}", target.Damageable);
                     target.Attack(declaration);
+                }
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log($"{name}: Entered {other}", other);
             _activeTargets.Enter(other);
         }
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log($"{name}: Exited {other}", other);
             _activeTargets.Exit(other);
         }
     }
