@@ -350,6 +350,9 @@ namespace MarkusSecundus.PhysicsSwordfight.Utils.Primitives
         /// <returns>Multiplication result of the two vectors</returns>
         public static Vector2 MultiplyElems(this Vector2 a, Vector2 b) => a.MultiplyElems(b.x, b.y);
 
+        public static float MaxMember(this Vector3 v) => Mathf.Max(Mathf.Max(v.x, v.y), v.z);
+        public static float MinItem(this Vector3 v) => Mathf.Min(Mathf.Min(v.x, v.y), v.z);
+
         /// <summary>
         /// Extract just x field of vector
         /// </summary>

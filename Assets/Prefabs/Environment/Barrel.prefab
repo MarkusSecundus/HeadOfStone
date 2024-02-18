@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 7685606023982932026}
   - component: {fileID: 2107474040192838161}
   m_Layer: 0
-  m_Name: Damager
+  m_Name: BarrelDamager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

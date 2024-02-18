@@ -3,6 +3,7 @@ using MarkusSecundus.Utils.Datastructs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace MarkusSecundus.PhysicsSwordfight.Automatization
@@ -36,7 +37,7 @@ namespace MarkusSecundus.PhysicsSwordfight.Automatization
         /// <summary>
         /// If set to <c>true</c>, <see cref="Seed"/> field will be ignored - random seed will be generated each time.
         /// </summary>
-        public bool RandomSeed = false;
+        public bool RandomSeed = true;
         private int RealSeed => RandomSeed ? Random.Range(int.MinValue, int.MaxValue) : Seed;
 
         /// <summary>

@@ -1,13 +1,16 @@
 using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
 using MarkusSecundus.PhysicsSwordfight.Utils.Geometry;
+using MarkusSecundus.PhysicsSwordfight.Utils.Primitives;
 using MarkusSecundus.PhysicsSwordfight.Utils.Randomness;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Diagnostics;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace MarkusSecundus.PhysicsSwordfight.Automatization
 {
@@ -36,6 +39,7 @@ namespace MarkusSecundus.PhysicsSwordfight.Automatization
         /// How many segments to make the whole circle.
         /// </summary>
         public int Segments = 8;
+        [SerializeField] public bool TryToFitNavMesh = false;
 
         private int SegmentIndex(float angle) => Mathf.RoundToInt((angle / 360f) * Segments);
 
@@ -75,7 +79,8 @@ namespace MarkusSecundus.PhysicsSwordfight.Automatization
         {
             float minAngle_radians = MinAngle * Mathf.Deg2Rad, maxAngle_radians = MaxAngle * Mathf.Deg2Rad;
             var randomAngle = rand.NextFloat(minAngle_radians, maxAngle_radians);
-            return transform.LocalToGlobal(SphereGeometryHelpers.GetPointOnCircle(randomAngle));
+            var ret = transform.LocalToGlobal(SphereGeometryHelpers.GetPointOnCircle(randomAngle));
+            return _navmeshFix(ret);
         }
 
         /// <inheritdoc/>
@@ -83,7 +88,16 @@ namespace MarkusSecundus.PhysicsSwordfight.Automatization
         {
             float minAngle_radians = MinAngle * Mathf.Deg2Rad, maxAngle_radians = MaxAngle * Mathf.Deg2Rad;
             var randomAngle = rand.NextFloat(minAngle_radians, maxAngle_radians);
-            return transform.LocalToGlobal(SphereGeometryHelpers.GetPointOnCircle(randomAngle) * rand.NextFloat(0f, 1f));
+            var ret = transform.LocalToGlobal(SphereGeometryHelpers.GetPointOnCircle(randomAngle) * rand.NextFloat(0f, 1f));
+            var fix =  _navmeshFix(ret);
+            Debug.Log($"Generated position: {randomAngle}.. {ret} -> {fix}", this);
+            return fix;
+        }
+        Vector3 _navmeshFix(Vector3 v)
+        {
+            if (TryToFitNavMesh && NavMesh.SamplePosition(v, out var hit, transform.lossyScale.MaxMember(), ~0))
+                return hit.position;
+            return v;
         }
     }
 }
