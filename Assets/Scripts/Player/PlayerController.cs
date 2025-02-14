@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     void VelocityUpdate(Vector3 newTargetVelocity, float delta)
     {
         velocity = Vector3.Lerp(velocity, newTargetVelocity, Mathf.Pow(delta, movementInertia));
+        
         if (!controller.isGrounded)
         {
             velocity += gravity * delta;
