@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
-    public static Damageable Get(Object o) => o.GetComponentInParent<Damageable>();
+    public static Damageable Get(Component o) => o.GetComponentInParent<Damageable>();
 
     [field: SerializeField] public float MaxHP { get; private set; } = 100;
     public const float MinHP = 0;

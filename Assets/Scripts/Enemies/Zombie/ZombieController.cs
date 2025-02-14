@@ -1,8 +1,7 @@
 using Assets.Scripts.AI.Targeting;
 using Assets.Scripts.DamageSystem;
 using Assets.Scripts.DamageSystem.Damagers;
-using Assets.Scripts.Utils.Extensions;
-using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
+using MarkusSecundus.Utils.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

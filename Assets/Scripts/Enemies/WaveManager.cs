@@ -1,4 +1,4 @@
-using MarkusSecundus.PhysicsSwordfight.Automatization;
+using MarkusSecundus.Utils.Behaviors.Automatization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

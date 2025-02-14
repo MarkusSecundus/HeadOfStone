@@ -28,5 +28,5 @@ public interface IInputProvider
     public bool GetKeyUp(KeyCode c);
 
 
-    public static IInputProvider Get(Object o) => o.GetComponentInParent<IInputProvider>();
+    public static IInputProvider Get(Component o) => o.GetComponentInParent<IInputProvider>();
 }

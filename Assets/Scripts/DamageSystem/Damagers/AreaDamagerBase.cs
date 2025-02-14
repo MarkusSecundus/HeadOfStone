@@ -1,5 +1,5 @@
-﻿using MarkusSecundus.PhysicsSwordfight.PhysicsUtils;
-using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
+﻿using MarkusSecundus.Utils.Physics;
+using MarkusSecundus.Utils.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
-using MarkusSecundus.PhysicsSwordfight.Utils.Geometry;
-using MarkusSecundus.PhysicsSwordfight.Utils.Graphics;
-using MarkusSecundus.PhysicsSwordfight.Utils.Primitives;
+using MarkusSecundus.Utils.Geometry;
+using MarkusSecundus.Utils.Graphics;
+using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             velocity += gravity * delta;
         }
-        controller.Move(velocity);
+        controller.Move(velocity * delta);
     }
     void RotationUpdate(Quaternion? newTargetRotation, float delta)
     {

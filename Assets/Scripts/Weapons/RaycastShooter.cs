@@ -2,7 +2,7 @@ using Assets.Scripts.DamageSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MarkusSecundus.PhysicsSwordfight.Utils.Extensions;
+using MarkusSecundus.Utils.Extensions;
 
 public class RaycastShooter : MonoBehaviour
 {
