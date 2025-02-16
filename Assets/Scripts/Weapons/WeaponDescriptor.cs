@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class WeaponDescriptor : MonoBehaviour
     public int MaxAmmo;
     public bool IsEnabled = false;
 
-    public int CurrentAmmo = -1;
+    [SerializeField] int _currentAmmo = -1;
+    public int CurrentAmmo { get => _currentAmmo < 0 ? _currentAmmo = MaxAmmo : _currentAmmo; private set => _currentAmmo = value; }
     public bool HasAmmo => CurrentAmmo != 0;
     public bool HasInfiniteAmmo => MaxAmmo < 0;
 

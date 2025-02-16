@@ -1,3 +1,4 @@
+using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -61,15 +62,15 @@ public class Damageable : MonoBehaviour
         HP = MaxHP;
     }
 
-    public void Heal(float amount) => ChangeHP(amount, OnHealed);
-    public void Damage(float amount) => ChangeHP(-amount, OnDamaged);
+    public bool Heal(float amount) => ChangeHP(amount, OnHealed);
+    public bool Damage(float amount) => ChangeHP(-amount, OnDamaged);
 
-    private void ChangeHP(float amount, UnityEvent<HealthChangeInfo> @event)
+    private bool ChangeHP(float amount, UnityEvent<HealthChangeInfo> @event)
     {
         if (IsDead)
         {
             Debug.Log($"Ignoring health change for already dead entity '{name}'", this);
-            return;
+            return false;
         }
 
         var info = HealthChangeInfo.Compute(this, amount);
@@ -82,5 +83,6 @@ public class Damageable : MonoBehaviour
         {
             OnDeath?.Invoke(info);
         }
+        return !info.ActualDeltaHP.IsNegligible();
     }
 }

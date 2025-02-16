@@ -132,9 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9838012}
   - component: {fileID: 9838014}
-  - component: {fileID: 9838013}
   m_Layer: 0
-  m_Name: BarrelSpawner
+  m_Name: PropsSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,26 +151,13 @@ Transform:
   m_LocalPosition: {x: 0.77, y: 1.43, z: -2.82}
   m_LocalScale: {x: 29.885065, y: 29.885065, z: 29.885065}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1735506317}
+  - {fileID: 1664879789}
+  - {fileID: 474868912}
+  - {fileID: 1256596530}
   m_Father: {fileID: 1557272460}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -266.538}
---- !u!114 &9838013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9838011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e20b14c2856a2439b4b86cf4c5cf7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnLocation: {fileID: 9838014}
-  ParentToFill: {fileID: 54791482}
-  ToPlace: {fileID: 9088806467273694769, guid: d542d1e1b474e3e46ad043ca7fbea784, type: 3}
-  Seed: 0
-  RandomSeed: 1
 --- !u!114 &9838014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3433,6 +3419,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472091505}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &474868911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 474868912}
+  - component: {fileID: 474868913}
+  m_Layer: 0
+  m_Name: ShotgunDropSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &474868912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474868911}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9838012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474868913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474868911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e20b14c2856a2439b4b86cf4c5cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnLocation: {fileID: 9838014}
+  ParentToFill: {fileID: 54791482}
+  ToPlace: {fileID: 8547882670835472687, guid: e1d8ed30fddd77449b14f19b6da29797, type: 3}
+  Seed: 0
+  RandomSeed: 1
 --- !u!1 &478762739
 GameObject:
   m_ObjectHideFlags: 0
@@ -7491,11 +7526,26 @@ MonoBehaviour:
     StartingAmount: 5
     MultiplicativeModifier: 1.1
     AdditiveModifier: 0.3
-  - Spawner: {fileID: 9838013}
+  - Spawner: {fileID: 1735506316}
     StartingWave: 1
     StartingAmount: 7
     MultiplicativeModifier: 1
     AdditiveModifier: 0
+  - Spawner: {fileID: 1664879790}
+    StartingWave: 4
+    StartingAmount: 3
+    MultiplicativeModifier: 1
+    AdditiveModifier: 0.15
+  - Spawner: {fileID: 474868913}
+    StartingWave: 2
+    StartingAmount: 3
+    MultiplicativeModifier: 1
+    AdditiveModifier: 0.15
+  - Spawner: {fileID: 1256596531}
+    StartingWave: 2
+    StartingAmount: 1
+    MultiplicativeModifier: 1
+    AdditiveModifier: 0.15
   OnWaveStart:
     m_PersistentCalls:
       m_Calls:
@@ -8466,6 +8516,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250683596}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1256596529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256596530}
+  - component: {fileID: 1256596531}
+  m_Layer: 0
+  m_Name: MedkitDropSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256596530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256596529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9838012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256596531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256596529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e20b14c2856a2439b4b86cf4c5cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnLocation: {fileID: 9838014}
+  ParentToFill: {fileID: 54791482}
+  ToPlace: {fileID: 6147202197099192366, guid: d86d96fe964b486489d5729f3ea241c4, type: 3}
+  Seed: 0
+  RandomSeed: 1
 --- !u!1 &1414502012
 GameObject:
   m_ObjectHideFlags: 0
@@ -9754,6 +9853,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655916210}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1664879788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664879789}
+  - component: {fileID: 1664879790}
+  m_Layer: 0
+  m_Name: BarrelDropSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664879789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664879788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9838012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1664879790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664879788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e20b14c2856a2439b4b86cf4c5cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnLocation: {fileID: 9838014}
+  ParentToFill: {fileID: 54791482}
+  ToPlace: {fileID: 7688086257841170374, guid: 02d0137e42ac8f849b3c3874f0bdad4f, type: 3}
+  Seed: 0
+  RandomSeed: 1
 --- !u!1 &1673488408
 GameObject:
   m_ObjectHideFlags: 0
@@ -10452,6 +10600,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706226996}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1735506315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1735506317}
+  - component: {fileID: 1735506316}
+  m_Layer: 0
+  m_Name: BarrelSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1735506316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735506315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e20b14c2856a2439b4b86cf4c5cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnLocation: {fileID: 9838014}
+  ParentToFill: {fileID: 54791482}
+  ToPlace: {fileID: 9088806467273694769, guid: d542d1e1b474e3e46ad043ca7fbea784, type: 3}
+  Seed: 0
+  RandomSeed: 1
+--- !u!4 &1735506317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735506315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9838012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793673195
 GameObject:
   m_ObjectHideFlags: 0
@@ -12751,6 +12948,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: _attackPaths.Array.data[2].Damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2210543096958285015, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
       propertyPath: m_Camera
@@ -12758,8 +12960,18 @@ PrefabInstance:
       objectReference: {fileID: 330585545}
     - target: {fileID: 4261413113345972407, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
+      propertyPath: IsEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4261413113345972407, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
       propertyPath: WeaponType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299093489756001560, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: IsEnabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4299093489756001560, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}

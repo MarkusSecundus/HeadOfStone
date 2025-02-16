@@ -37,6 +37,7 @@ public class WeaponListManager : MonoBehaviour
 
     public void SwitchWeapon(WeaponDescriptor newWeapon)
     {
+        if (!newWeapon.IsEnabled) return;
         if (newWeapon == CurrentWeapon) return;
         if(CurrentWeapon)
             CurrentWeapon.gameObject.SetActive(false);

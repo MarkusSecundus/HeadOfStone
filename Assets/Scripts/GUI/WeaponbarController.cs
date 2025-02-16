@@ -26,8 +26,9 @@ public class WeaponbarController : MonoBehaviour
         TargetWeaponList.OnStateUpdated.RemoveListener(UpdateState);
     }
 
-    private void UpdateState(WeaponDescriptor info)
+    private void UpdateState(WeaponDescriptor weapon)
     {
-        _text.text = string.Format(info.HasInfiniteAmmo?FormatWhenInfiniteAmmo:Format, info.GunName, info.CurrentAmmo, info.MaxAmmo);
+        if (weapon != TargetWeaponList.CurrentWeapon) return;
+        _text.text = string.Format(weapon.HasInfiniteAmmo?FormatWhenInfiniteAmmo:Format, weapon.GunName, weapon.CurrentAmmo, weapon.MaxAmmo);
     }
 }
