@@ -35,7 +35,7 @@ public class WeaponListManager : MonoBehaviour
         }
     }
 
-    void SwitchWeapon(WeaponDescriptor newWeapon)
+    public void SwitchWeapon(WeaponDescriptor newWeapon)
     {
         if (newWeapon == CurrentWeapon) return;
         if(CurrentWeapon)

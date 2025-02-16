@@ -19,7 +19,7 @@ public class RaycastShooter : MonoBehaviour
     }
     [SerializeField] AttackPathDeclaration[] _attackPaths;
 
-    [SerializeField] UnityEvent<AttackDeclaration, IArmorPiece> OnAttacked;
+    [SerializeField] UnityEvent OnAttack;
 
     [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
     IInputProvider input;
@@ -62,6 +62,7 @@ public class RaycastShooter : MonoBehaviour
             victim.Attack(new AttackDeclaration { Attacker = this, Damage = damage, Type = _damageType });
         }
 
+        OnAttack.Invoke();
     }
 
 

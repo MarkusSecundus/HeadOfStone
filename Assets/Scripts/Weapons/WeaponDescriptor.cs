@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class WeaponDescriptor : MonoBehaviour
 {
     public KeyCode ActivationKey;
+    public WeaponType WeaponType;
     public string GunName;
     public int MaxAmmo;
     public bool IsEnabled = false;
