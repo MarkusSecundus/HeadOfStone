@@ -65,8 +65,11 @@ public class PlayerController : MonoBehaviour
     Quaternion? GetTargetRotation()
     {
         var inputRay = input.GetMouseRay();
-        if (inputRay.Intersect(new Plane(Vector3.up, transform.position.y)) is Vector3 lookPoint)
+        if (inputRay.Intersect(new Plane(Vector3.up, transform.position)) is Vector3 lookPoint)
+        {
+            //Debug.DrawRay(lookPoint, Vector3.up * 100, Color.blue);
             return Quaternion.LookRotation((lookPoint - transform.position).With(y: 0));
+        }
         return null;
     }
 

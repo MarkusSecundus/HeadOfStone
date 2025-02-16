@@ -12751,50 +12751,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _drawGizmos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _cooldown_seconds
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _attackPaths.Array.data[0].Damage
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _attackPaths.Array.data[1].Damage
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _attackPaths.Array.data[2].Damage
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _attackPaths.Array.data[3].Damage
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _attackPaths.Array.data[4].Damage
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 2210543096958285015, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
       propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 4261413113345972407, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: WeaponType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299093489756001560, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: WeaponType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330306404342765560, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: _camera
       value: 
       objectReference: {fileID: 330585545}
     - target: {fileID: 4679040804168431864, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229445325712359261, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: WeaponType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889240487080920498, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}

@@ -22,6 +22,11 @@ namespace Assets.Scripts.IO
 
         public bool GetKeyUp(KeyCode c) => Input.GetKeyUp(c);
 
-        public Ray GetMouseRay() => camera.ScreenPointToRay(Input.mousePosition);
+        public Ray GetMouseRay()
+        {
+            var ret = camera.ScreenPointToRay(Input.mousePosition);
+            //Debug.DrawRay(ret.origin, ret.direction*10f, Color.yellow);
+            return ret;
+        }
     }
 }
