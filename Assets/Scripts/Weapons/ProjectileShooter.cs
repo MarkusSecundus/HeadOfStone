@@ -23,10 +23,7 @@ public class ProjectileShooter : MonoBehaviour
     private void Update()
     {
         if (_input.GetKeyDown(KeyToShoot))
-            if (_weaponDescriptor.AddAmmo(-1))
                 DoShoot();
-            else
-                Debug.Log($"Insufficient ammo! ({_weaponDescriptor.CurrentAmmo})", this);
     }
 
     double _nextPermittedShotTime = double.NegativeInfinity;
@@ -35,6 +32,9 @@ public class ProjectileShooter : MonoBehaviour
         if (Time.timeAsDouble < _nextPermittedShotTime)
             return;
         _nextPermittedShotTime = Time.timeAsDouble + Cooldown_seconds;
+
+        if (!_weaponDescriptor.AddAmmo(-1))
+            return;
 
         var bullet = Instantiate(BulletPrototype, null);
         bullet.transform.position = BulletPrototype.transform.position;

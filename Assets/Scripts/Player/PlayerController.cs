@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-    Vector3 velocity = Vector3.zero;
+    Vector3 _movementVelocity = Vector3.zero;
+    Vector3 _gravitationalVelocity = Vector3.zero;
+    Vector3 _totalVelocity => _movementVelocity + _gravitationalVelocity;
     void Update()
     {
         var delta = Time.deltaTime;
@@ -38,13 +40,15 @@ public class PlayerController : MonoBehaviour
 
     void VelocityUpdate(Vector3 newTargetVelocity, float delta)
     {
-        velocity = Vector3.Lerp(velocity, newTargetVelocity, Mathf.Pow(delta, movementInertia));
-        
-        if (!controller.isGrounded)
-        {
-            velocity += gravity * delta;
-        }
-        controller.Move(velocity * delta);
+        _movementVelocity = Vector3.Lerp(_movementVelocity, newTargetVelocity, Mathf.Pow(delta, movementInertia));
+
+        if (controller.isGrounded)
+            _gravitationalVelocity = Vector3.zero;
+        else
+            _gravitationalVelocity += gravity * delta;
+
+        _movementVelocity.ClampMagnitude(0f, movementSpeed);
+        controller.Move(_totalVelocity * delta);
     }
     void RotationUpdate(Quaternion? newTargetRotation, float delta)
     {

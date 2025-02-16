@@ -19,7 +19,10 @@ public class WeaponListManager : MonoBehaviour
         _input = IInputProvider.Get(this);
         _weapons = GetComponentsInChildren<WeaponDescriptor>(true).ToDictionary(w=>w.ActivationKey);
         foreach (var (_, w) in _weapons) w.OnStateUpdated.AddListener(OnWeaponUpdated);
-        CurrentWeapon = _weapons.Values.Single(w => w.isActiveAndEnabled);
+
+        CurrentWeapon = _weapons.Values.First(w => w.IsEnabled);
+        foreach (var (_, w) in _weapons) w.gameObject.SetActive(false);
+        CurrentWeapon.gameObject.SetActive(true);
         Assert.IsTrue(CurrentWeapon.IsEnabled);
         OnWeaponUpdated(CurrentWeapon);
     }
