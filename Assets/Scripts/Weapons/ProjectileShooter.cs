@@ -5,6 +5,8 @@ using UnityEngine;
 using MarkusSecundus.Utils.Extensions;
 using Assets.Scripts.IO;
 using MarkusSecundus.Utils.Input;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Linq;
 
 
 
@@ -13,6 +15,8 @@ public class ProjectileShooter : MonoBehaviour
     public interface IProjectile
     {
         public void OnShot(ProjectileShooter weapon);
+
+        public bool CheckCanShoot() => true;
     }
 
     [SerializeField] float ShootForce;
@@ -20,6 +24,7 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] int MaxProjectilesInExistence = -1;
     [SerializeField] Transform ShootDirection;
     [SerializeField] Rigidbody BulletPrototype;
+    IProjectile[] _bulletPrototypeScripts;
 
     [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
     IInputProvider<InputAxis> _input;
@@ -42,6 +47,7 @@ public class ProjectileShooter : MonoBehaviour
     {
         _input = IInputProvider<InputAxis>.Get(this);
         _weaponDescriptor = GetComponentInParent<WeaponDescriptor>();
+        _bulletPrototypeScripts = BulletPrototype.GetComponentsInChildren<IProjectile>(true);
 
         StartCoroutine(deadProjectileRemover());
         IEnumerator deadProjectileRemover()
@@ -67,6 +73,8 @@ public class ProjectileShooter : MonoBehaviour
         if (MaxProjectilesInExistence >= 0 && _projectiles.Count >= MaxProjectilesInExistence)
             return;
         if (Time.timeAsDouble < _nextPermittedShotTime)
+            return;
+        if (_bulletPrototypeScripts?.Length > 0 && _bulletPrototypeScripts.Any(sc => !sc.CheckCanShoot()))
             return;
         _nextPermittedShotTime = Time.timeAsDouble + Cooldown_seconds;
 
