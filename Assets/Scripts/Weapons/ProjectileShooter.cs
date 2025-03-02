@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MarkusSecundus.Utils.Extensions;
+using Assets.Scripts.IO;
+using MarkusSecundus.Utils.Input;
 
 
 
@@ -20,7 +22,7 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] Rigidbody BulletPrototype;
 
     [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
-    IInputProvider _input;
+    IInputProvider<InputAxis> _input;
     WeaponDescriptor _weaponDescriptor;
 
 
@@ -38,7 +40,7 @@ public class ProjectileShooter : MonoBehaviour
 
     private void Start()
     {
-        _input = IInputProvider.Get(this);
+        _input = IInputProvider<InputAxis>.Get(this);
         _weaponDescriptor = GetComponentInParent<WeaponDescriptor>();
 
         StartCoroutine(deadProjectileRemover());

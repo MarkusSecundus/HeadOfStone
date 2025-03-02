@@ -6,6 +6,8 @@ using MarkusSecundus.Utils.Extensions;
 using UnityEngine.Events;
 using MarkusSecundus.Utils.Datastructs;
 using MarkusSecundus.Utils.Debugging;
+using Assets.Scripts.IO;
+using MarkusSecundus.Utils.Input;
 
 public class RaycastShooter : MonoBehaviour
 {
@@ -22,11 +24,11 @@ public class RaycastShooter : MonoBehaviour
     [SerializeField] UnityEvent OnAttack;
 
     [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
-    IInputProvider input;
+    IInputProvider<InputAxis> input;
     WeaponDescriptor _weaponDescriptor;
     private void Start()
     {
-        input = IInputProvider.Get(this);
+        input = IInputProvider<InputAxis>.Get(this);
         _weaponDescriptor = GetComponentInParent<WeaponDescriptor>();
     }
 

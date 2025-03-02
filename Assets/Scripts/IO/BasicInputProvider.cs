@@ -1,4 +1,5 @@
 ﻿using MarkusSecundus.Utils.Extensions;
+using MarkusSecundus.Utils.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +9,21 @@ using UnityEngine;
 
 namespace Assets.Scripts.IO
 {
-    public class BasicInputProvider : AbstractInputProvider
+    public enum InputAxis
     {
-        [SerializeField] Camera _camera;
-        new Camera camera => _camera = _camera.IfNil(Camera.main);
+        Horizontal,
+        Vertical,
+        MouseX,
+        MouseY
+    }
+    public static class InputAxisExtensions
+    {
+        public static string GetName(this InputAxis a) => a.ToString();
+    }
 
-        public override float GetAxis(InputAxis axis) => Input.GetAxis(axis.GetName());
-        public override float GetAxisRaw(InputAxis axis) => Input.GetAxisRaw(axis.GetName());
 
-        public override bool GetKey(KeyCode c) => Input.GetKey(c);
-
-        public override bool GetKeyDown(KeyCode c) => Input.GetKeyDown(c);
-
-        public override bool GetKeyUp(KeyCode c) => Input.GetKeyUp(c);
-
-        public override Ray GetMouseRay()
-        {
-            var ret = camera.ScreenPointToRay(Input.mousePosition);
-            //Debug.DrawRay(ret.origin, ret.direction*10f, Color.yellow);
-            return ret;
-        }
+    public class BasicInputProvider : BasicInputProviderBase<InputAxis>
+    {
+        protected override string GetAxisName(InputAxis axis) => axis.GetName();
     }
 }

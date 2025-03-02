@@ -6721,14 +6721,15 @@ GameObject:
   - component: {fileID: 7447652329420395602}
   - component: {fileID: 5538078067434719761}
   - component: {fileID: 2303942807146478703}
-  - component: {fileID: 2438013363047189193}
+  - component: {fileID: 4188156958691512114}
+  - component: {fileID: 8319658042676347575}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6326897928151095479
 Transform:
   m_ObjectHideFlags: 0
@@ -6855,7 +6856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b504d05487a4934383c3617ba8c7669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2438013363047189193
+--- !u!114 &4188156958691512114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6864,11 +6865,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 6266583532909704295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c7cf71e0d36314789b707c5e58fdc0, type: 3}
+  m_Script: {fileID: 11500000, guid: e7a5a0149c02d8c4f865f437e6b4dba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detonateKey: 324
-  _explosion: {fileID: 3302536123188171093}
+--- !u!114 &8319658042676347575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266583532909704295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ec0ea179d5cfe42bd3fadcf36b7e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  __inputSource: {fileID: 0}
+  Events:
+    values:
+    - key: 324
+      value:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 3302536123188171093}
+            m_TargetAssemblyTypeName: ExplosionEffect, MainAssembly
+            m_MethodName: RunExplosionEffect
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!1 &6374924256047328757
 GameObject:
   m_ObjectHideFlags: 0
@@ -7571,6 +7601,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6326897928151095479}
     m_Modifications:
+    - target: {fileID: 2157482087418348335, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506298328667798442, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506298328667798442, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506298328667798442, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506298328667798442, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3990876419981158602, guid: 2972a8900c1b04a48a04831490c2eed5,
         type: 3}
       propertyPath: m_Name

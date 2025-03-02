@@ -1,3 +1,5 @@
+using Assets.Scripts.IO;
+using MarkusSecundus.Utils.Input;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +9,11 @@ public class Cannonball : MonoBehaviour, ProjectileShooter.IProjectile
     [SerializeField] KeyCode _detonateKey;
     [SerializeField] ExplosionEffect _explosion;
 
-    IInputProvider _input;
+    IInputProvider<InputAxis> _input;
 
     public void OnShot(ProjectileShooter weapon)
     {
-        _input = IInputProvider.Get(weapon);
+        _input = IInputProvider<InputAxis>.Get(weapon);
     }
 
     private void Update()

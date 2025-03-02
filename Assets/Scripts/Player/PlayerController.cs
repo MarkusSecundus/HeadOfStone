@@ -1,5 +1,7 @@
+using Assets.Scripts.IO;
 using MarkusSecundus.Utils.Geometry;
 using MarkusSecundus.Utils.Graphics;
+using MarkusSecundus.Utils.Input;
 using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,12 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector3 gravity = new Vector3(0, -9.81f, 0);
     [SerializeField] Transform bodyToRotate;
 
-    IInputProvider input;
+    IInputProvider<InputAxis> input;
     CharacterController controller;
 
     void Start()
     {
-        input = IInputProvider.Get(this);
+        input = IInputProvider<InputAxis>.Get(this);
         controller = GetComponent<CharacterController>();
     }
 

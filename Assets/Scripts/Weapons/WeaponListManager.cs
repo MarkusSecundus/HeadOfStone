@@ -1,3 +1,5 @@
+using Assets.Scripts.IO;
+using MarkusSecundus.Utils.Input;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,11 @@ public class WeaponListManager : MonoBehaviour
 
     public UnityEvent<WeaponDescriptor> OnStateUpdated;
 
-    IInputProvider _input;
+    IInputProvider<InputAxis> _input;
 
     private void Start()
     {
-        _input = IInputProvider.Get(this);
+        _input = IInputProvider<InputAxis>.Get(this);
         _weapons = GetComponentsInChildren<WeaponDescriptor>(true).ToDictionary(w=>w.ActivationKey);
         foreach (var (_, w) in _weapons) w.OnStateUpdated.AddListener(OnWeaponUpdated);
 
