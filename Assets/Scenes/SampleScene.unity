@@ -12948,35 +12948,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1924410881117174149, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: _attackPaths.Array.data[2].Damage
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 2210543096958285015, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
-    - target: {fileID: 4261413113345972407, guid: 969d05ac0ed5a404198ac408f00543c9,
+    - target: {fileID: 4118067848455302093, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
-      propertyPath: IsEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261413113345972407, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: WeaponType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299093489756001560, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: IsEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299093489756001560, guid: 969d05ac0ed5a404198ac408f00543c9,
-        type: 3}
-      propertyPath: WeaponType
-      value: 3
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4330306404342765560, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
@@ -12988,10 +12968,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6229445325712359261, guid: 969d05ac0ed5a404198ac408f00543c9,
+    - target: {fileID: 5354102374780645881, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}
-      propertyPath: WeaponType
-      value: 1
+      propertyPath: m_Positions.Array.data[1].z
+      value: 2.399393
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314889760643829173, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: _drawGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602948428435572183, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: BlinkingOnOff.OnDuration_seconds
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602948428435572183, guid: 969d05ac0ed5a404198ac408f00543c9,
+        type: 3}
+      propertyPath: BlinkingOnOff.BuildupTime_seconds
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8889240487080920498, guid: 969d05ac0ed5a404198ac408f00543c9,
         type: 3}

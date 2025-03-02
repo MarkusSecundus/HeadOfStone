@@ -7,7 +7,7 @@ namespace Assets.Scripts.DamageSystem
 {
     [System.Serializable]public enum DamageType
     {
-        Piercing, Sharp, Blunt, Fire
+        Piercing, Sharp, Blunt, Fire, Explosion
     }
 
     [System.Serializable] public struct AttackDeclaration

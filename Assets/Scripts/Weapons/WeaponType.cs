@@ -7,5 +7,8 @@ public enum WeaponType
     Invalid = default,
     Musket,
     Shotgun,
-    Barrels
+    Barrels,
+    Cannon,
+    Gunpowder,
+    Flamer
 }

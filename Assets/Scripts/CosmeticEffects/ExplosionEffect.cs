@@ -19,11 +19,12 @@ public class ExplosionEffect : MonoBehaviour
     [SerializeField] UnityEvent OnExplosionFinished;
     public void RunExplosionEffect()
     {
-        ExplosionParticles.Play();
+        ExplosionParticles?.Play();
 
-        ToTint.material.DOColor(ExplosionColorTint, TintDuration_seconds);
+        if(ToTint) ToTint.material.DOColor(ExplosionColorTint, TintDuration_seconds);
 
         this.InvokeWithDelay(() => OnExplosion?.Invoke(), UntilExplosionCallback_seconds);
+        if (ExplosionMesh)
         {
             var originalScale = ExplosionMesh.transform.localScale;
             ExplosionMesh.transform.localScale = Vector3.zero;

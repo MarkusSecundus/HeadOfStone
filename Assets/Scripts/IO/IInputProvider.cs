@@ -30,3 +30,15 @@ public interface IInputProvider
 
     public static IInputProvider Get(Component o) => o.GetComponentInParent<IInputProvider>();
 }
+
+public abstract class AbstractInputProvider : MonoBehaviour, IInputProvider
+{
+    public abstract float GetAxis(InputAxis axis);
+    public abstract float GetAxisRaw(InputAxis axis);
+    public abstract bool GetKey(KeyCode c);
+    public abstract bool GetKeyDown(KeyCode c);
+
+    public abstract bool GetKeyUp(KeyCode c);
+
+    public abstract Ray GetMouseRay();
+}

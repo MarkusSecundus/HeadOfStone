@@ -8,21 +8,21 @@ using UnityEngine;
 
 namespace Assets.Scripts.IO
 {
-    public class BasicInputProvider : MonoBehaviour, IInputProvider
+    public class BasicInputProvider : AbstractInputProvider
     {
         [SerializeField] Camera _camera;
         new Camera camera => _camera = _camera.IfNil(Camera.main);
 
-        public float GetAxis(InputAxis axis) => Input.GetAxis(axis.GetName());
-        public float GetAxisRaw(InputAxis axis) => Input.GetAxisRaw(axis.GetName());
+        public override float GetAxis(InputAxis axis) => Input.GetAxis(axis.GetName());
+        public override float GetAxisRaw(InputAxis axis) => Input.GetAxisRaw(axis.GetName());
 
-        public bool GetKey(KeyCode c) => Input.GetKey(c);
+        public override bool GetKey(KeyCode c) => Input.GetKey(c);
 
-        public bool GetKeyDown(KeyCode c) => Input.GetKeyDown(c);
+        public override bool GetKeyDown(KeyCode c) => Input.GetKeyDown(c);
 
-        public bool GetKeyUp(KeyCode c) => Input.GetKeyUp(c);
+        public override bool GetKeyUp(KeyCode c) => Input.GetKeyUp(c);
 
-        public Ray GetMouseRay()
+        public override Ray GetMouseRay()
         {
             var ret = camera.ScreenPointToRay(Input.mousePosition);
             //Debug.DrawRay(ret.origin, ret.direction*10f, Color.yellow);
