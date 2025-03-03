@@ -10,7 +10,7 @@ public class GunpowderBehavior : MonoBehaviour, ProjectileShooter.IProjectile
     Grid _grid;
     private void Start()
     {
-        _grid = TagSearchable.FindByTag(_gridTag).GetComponent<Grid>();
+        _grid = TagSearchable.FindByTag<Grid>(_gridTag);
     }
 
     private void OnDestroy()

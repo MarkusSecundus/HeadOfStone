@@ -1,29 +1,45 @@
+using JetBrains.Annotations;
 using MarkusSecundus.Utils.Datastructs;
 using MarkusSecundus.Utils.Debugging;
 using MarkusSecundus.Utils.Extensions;
+using MarkusSecundus.Utils.Graphics;
 using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+
+
 
 public class Grid : MonoBehaviour
 {
-    [field: SerializeField] public Vector2 Dimensions { get; private set; } = new Vector2(1f, 1f);
-    [field: SerializeField] public VectorField.FieldType NormalDimension => VectorField.FieldType.Y;
-    [field: SerializeField] public float NormalPosition => 0f;
+    [System.Serializable] public struct PlacementDescriptor
+    {
+        [field:SerializeField] public Transform Pivot { get; private set; }
+        [field: SerializeField] public Vector2 Dimensions { get; private set; }
 
-    public int Index0 => NormalDimension.ToIndex() == 0 ? 1 : 0;
-    public int Index1 => NormalDimension.ToIndex() == 2 ? 1 : 2;
+        public PlacementDescriptor(Transform pivot, Vector2? dimensions = null) => (Pivot, Dimensions) = (pivot, dimensions ?? Vector2.zero);
+
+        //public static implicit operator PlacementDescriptor(Transform pivot) => new PlacementDescriptor(pivot);
+
+        public void DrawGizmo() => DrawHelpers.DrawLineSquare(Dimensions, Pivot, Gizmos.DrawLine);
+
+
+        public static PlacementDescriptor Default => default;
+    }
+
+
+    [field: SerializeField] public Vector2 Dimensions { get; private set; } = new Vector2(1f, 1f);
+
 
     DefaultValDict<Vector2Int, List<Transform>> _objectsOnGrid = new(o => new ());
 
 
-    Vector3 MakeVector3(float _0, float _1, float normal)
+
+
+    Vector3 VectorLocalToGlobal(Vector2 local)
     {
-        Vector3 ret = default;
-        ret[Index0] = _0;
-        ret[Index1] = _1;
-        ret[NormalDimension.ToIndex()] = normal;
+        Vector3 ret = new Vector3(local.x, 0f, local.y);
         ret = transform.LocalToGlobal(ret);
         return ret;
     }
@@ -31,7 +47,7 @@ public class Grid : MonoBehaviour
     public Vector2Int GetGridCoords(Vector3 pos)
     {
         pos = transform.GlobalToLocal(pos);
-        return new Vector2Int((int)(pos[Index0] / Dimensions[0]), (int)(pos[Index1] / Dimensions[1]));
+        return new Vector2Int(Mathf.FloorToInt(pos.x / Dimensions.x), Mathf.FloorToInt(pos.z / Dimensions.y));
     }
 
 
@@ -52,13 +68,29 @@ public class Grid : MonoBehaviour
 
     public Vector3 GetGridPointOrigin(Vector2Int gridCoords)
     {
-        var ret = Dimensions.MultiplyElems(gridCoords.x, gridCoords.y);
-        return MakeVector3(ret.x, ret.y, NormalPosition);
+        var ret = Dimensions.MultiplyElems(gridCoords.x, gridCoords.y) ;
+        return VectorLocalToGlobal(ret);
+    }
+    public Vector3 GetGridPointEnd(Vector2Int gridCoords)
+    {
+        var ret = Dimensions.MultiplyElems(gridCoords.x, gridCoords.y) + Dimensions * 1f;
+        return VectorLocalToGlobal(ret);
     }
     public Vector3 GetGridPointCenter(Vector2Int gridCoords)
     {
-        var ret = Dimensions.MultiplyElems(gridCoords.x, gridCoords.y) - Dimensions * 0.5f;
-        return MakeVector3(ret.x, ret.y, NormalPosition);
+        var ret = Dimensions.MultiplyElems(gridCoords.x, gridCoords.y) + Dimensions * 0.5f;
+        return VectorLocalToGlobal(ret);
+    }
+
+    public Interval<Vector2Int> GetGridCoords(PlacementDescriptor placement)
+    {
+        return new Interval<Vector2Int>(GetGridCoords(placement.Pivot.LocalToGlobal(placement.Pivot.localPosition -placement.Dimensions.x0y() * 0.5f)), GetGridCoords(placement.Pivot.LocalToGlobal(placement.Pivot.localPosition + placement.Dimensions.x0y() * 0.5f)));
+    }
+    public Vector3 GetGridPosition(PlacementDescriptor placement)
+    {
+        if (placement.Dimensions == Vector2.zero) return GetGridPointCenter(GetGridCoords(placement.Pivot.position)); //fast path where the placed object is just a point
+        var gridCoords = GetGridCoords(placement);
+        return (GetGridPointOrigin(gridCoords.Min) + GetGridPointEnd(gridCoords.Max)) * 0.5f;
     }
 
     public void RegisterToGrid(Transform obj, Vector2Int? gridCoords=null)
@@ -67,16 +99,28 @@ public class Grid : MonoBehaviour
         _objectsOnGrid[gridCoords.Value].Add(obj);
     }
 
+    public void RegisterToGrid(PlacementDescriptor placement)
+    {
+        foreach (var coord in GetGridCoords(placement).IterateValuesInclusive()) RegisterToGrid(placement.Pivot, coord);
+    }
 
-    public void UnregisterFromGrid(Transform obj, Vector2Int? gridCoords=null)
+
+    public bool UnregisterFromGrid(Transform obj, Vector2Int? gridCoords=null)
     {
         gridCoords ??= GetGridCoords(obj.position);
         if(_objectsOnGrid.TryGetValue(gridCoords.Value, out var list))
         {
-            list.Remove(obj);
+            var didFind = list.Remove(obj);
             if (list.Count <= 0) _objectsOnGrid.Remove(gridCoords.Value);
+            return didFind;
         }
+        return false;
     }
+    public void UnregisterFromGrid(PlacementDescriptor placement)
+    {
+        foreach (var coord in GetGridCoords(placement).IterateValuesInclusive()) UnregisterFromGrid(placement.Pivot, coord);
+    }
+
 
     [SerializeField] bool _shouldDrawGizmos = false;
     private void OnDrawGizmos()
@@ -88,8 +132,8 @@ public class Grid : MonoBehaviour
             const int SIZE = 20;
             for (int t = -SIZE; t < SIZE; ++t)
             {
-                Gizmos.DrawLine(GetGridPointCenter(new Vector2Int(t, -SIZE)), GetGridPointCenter(new Vector2Int(t, SIZE)));
-                Gizmos.DrawLine(GetGridPointCenter(new Vector2Int(-SIZE, t)), GetGridPointCenter(new Vector2Int(SIZE, t)));
+                Gizmos.DrawLine(GetGridPointOrigin(new Vector2Int(t, -SIZE)), GetGridPointOrigin(new Vector2Int(t, SIZE)));
+                Gizmos.DrawLine(GetGridPointOrigin(new Vector2Int(-SIZE, t)), GetGridPointOrigin(new Vector2Int(SIZE, t)));
             }
         }
     }
