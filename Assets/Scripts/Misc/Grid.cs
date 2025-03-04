@@ -6,7 +6,9 @@ using MarkusSecundus.Utils.Graphics;
 using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -22,8 +24,16 @@ public class Grid : MonoBehaviour
 
         //public static implicit operator PlacementDescriptor(Transform pivot) => new PlacementDescriptor(pivot);
 
-        public void DrawGizmo() => DrawHelpers.DrawLineSquare(Dimensions, Pivot, Gizmos.DrawLine);
+        public void DrawGizmo() => DrawHelpers.DrawWireSquare(Dimensions, Pivot, Gizmos.DrawLine);
 
+
+        public void GetRectangleEdgePointsWorldspace(out Vector3 a, out Vector3 b, out Vector3 c, out Vector3 d)
+        {
+            a = Pivot.LocalToGlobal(Dimensions.With(x: -V.X, y: 0, z: -V.Y) * 0.5f);
+            b = Pivot.LocalToGlobal(Dimensions.With(x:  V.X, y: 0, z:  V.Y) * 0.5f);
+            c = Pivot.LocalToGlobal(Dimensions.With(x:  V.X, y: 0, z: -V.Y) * 0.5f);
+            d = Pivot.LocalToGlobal(Dimensions.With(x: -V.X, y: 0, z:  V.Y) * 0.5f);
+        }
 
         public static PlacementDescriptor Default => default;
     }
@@ -44,18 +54,19 @@ public class Grid : MonoBehaviour
         return ret;
     }
 
-    public Vector2Int GetGridCoords(Vector3 pos)
+    public Vector2Int GetGridCoords(Vector3 pos, out Vector2 offsetFromCellOrigin)
     {
         pos = transform.GlobalToLocal(pos);
-        return new Vector2Int(Mathf.FloorToInt(pos.x / Dimensions.x), Mathf.FloorToInt(pos.z / Dimensions.y));
+        return new Vector2Int(pos.x.DivideWithRemainder(Dimensions.x, out offsetFromCellOrigin.x), pos.z.DivideWithRemainder(Dimensions.y, out offsetFromCellOrigin.y));
     }
+    public Vector2Int GetGridCoords(Vector3 pos) => GetGridCoords(pos, out _);
 
 
-    public bool TryGetObjectsOnGridPoint(Vector3 worldCoords, out IReadOnlyList<Transform> objects)
+    public bool TryGetObjectsOnGridPoint(Vector3 worldCoords, out IReadOnlyCollection<Transform> objects)
     {
         return TryGetObjectsOnGridPoint(GetGridCoords(worldCoords), out objects);
     }
-    public bool TryGetObjectsOnGridPoint(Vector2Int gridCoords, out IReadOnlyList<Transform> objects)
+    public bool TryGetObjectsOnGridPoint(Vector2Int gridCoords, out IReadOnlyCollection<Transform> objects)
     {
         objects = default;
         if (_objectsOnGrid.TryGetValue(gridCoords, out var ret))
@@ -82,9 +93,47 @@ public class Grid : MonoBehaviour
         return VectorLocalToGlobal(ret);
     }
 
+
+    public static (int, T) Min<T>((int value, T additional) a, (int value, T additional) b)
+    {
+        return a.value <= b.value ? a : b;
+    }
+    public static (int, T) Max<T>((int value, T additional) a, (int value, T additional) b)
+    {
+        return a.value >= b.value ? a : b;
+    }
+
     public Interval<Vector2Int> GetGridCoords(PlacementDescriptor placement)
     {
-        return new Interval<Vector2Int>(GetGridCoords(placement.Pivot.LocalToGlobal(placement.Pivot.localPosition -placement.Dimensions.x0y() * 0.5f)), GetGridCoords(placement.Pivot.LocalToGlobal(placement.Pivot.localPosition + placement.Dimensions.x0y() * 0.5f)));
+        placement.GetRectangleEdgePointsWorldspace(out var a, out var b, out var c, out var d);
+
+        Vector2Int aGrid = GetGridCoords(a, out var offsetA), bGrid = GetGridCoords(b, out var offsetB);
+        Vector2Int cGrid = GetGridCoords(c, out var offsetC), dGrid = GetGridCoords(d, out var offsetD);
+        var ret = Interval.Make(aGrid.Min(bGrid).Min(cGrid).Min(dGrid), aGrid.Max(bGrid).Max(cGrid).Max(dGrid));
+
+
+#if true
+        var (minX, minOffsetX) = Min((aGrid.x, offsetA), Min((bGrid.x, offsetB), Min((cGrid.x, offsetC), (dGrid.x, offsetD))));
+        var (minY, minOffsetY) = Min((aGrid.y, offsetA), Min((bGrid.y, offsetB), Min((cGrid.y, offsetC), (dGrid.y, offsetD))));
+        var (maxX, maxOffsetX) = Max((aGrid.x, offsetA), Max((bGrid.x, offsetB), Max((cGrid.x, offsetC), (dGrid.x, offsetD))));
+        var (maxY, maxOffsetY) = Max((aGrid.y, offsetA), Max((bGrid.y, offsetB), Max((cGrid.y, offsetC), (dGrid.y, offsetD))));
+        
+        Vector2 minOffset = minOffsetX.Min(minOffsetY);
+        Vector2 maxOffset = Dimensions - maxOffsetX.Max(maxOffsetY);
+
+        if (maxOffset.x + minOffset.x >= Dimensions.x) { 
+            if (maxOffset.x > minOffset.x) 
+                ret.Max.x -= 1; 
+            else ret.Min.x += 1; 
+        }
+        if (maxOffset.y + minOffset.y >= Dimensions.y) {
+            if (maxOffset.y > minOffset.y) 
+                ret.Max.y -= 1; 
+            else ret.Min.y += 1; 
+        }
+        //Debug.Log($"{maxOffset}, {minOffset}");
+#endif
+        return ret;
     }
     public Vector3 GetGridPosition(PlacementDescriptor placement)
     {
