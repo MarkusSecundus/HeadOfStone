@@ -71,11 +71,17 @@ public class ProjectileShooter : MonoBehaviour
     {
         _removeDeadProjectiles();
         if (MaxProjectilesInExistence >= 0 && _projectiles.Count >= MaxProjectilesInExistence)
+        {
+            Debug.Log($"Cannot shoot - max projectiles in existence count reached!");
             return;
+        }
         if (Time.timeAsDouble < _nextPermittedShotTime)
             return;
         if (_bulletPrototypeScripts?.Length > 0 && _bulletPrototypeScripts.Any(sc => !sc.CheckCanShoot()))
+        {
+            Debug.Log($"Cannot shoot - Bullet refuses!");
             return;
+        }
         _nextPermittedShotTime = Time.timeAsDouble + Cooldown_seconds;
 
         if (!_weaponDescriptor.AddAmmo(-1))

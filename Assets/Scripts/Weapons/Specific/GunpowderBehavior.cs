@@ -1,30 +1,9 @@
 using MarkusSecundus.Utils.Behaviors.GameObjects;
+using MarkusSecundus.Utils.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunpowderBehavior : MonoBehaviour, ProjectileShooter.IProjectile
+public class GunpowderBehavior : MonoBehaviour
 {
-    [SerializeField] string _gridTag;
-
-    Grid _grid;
-    private void Start()
-    {
-        _grid = TagSearchable.FindByTag<Grid>(_gridTag);
-    }
-
-    private void OnDestroy()
-    {
-        if (_grid) _grid.UnregisterFromGrid(transform);
-    }
-
-    public void OnShot(ProjectileShooter weapon)
-    {
-        if (_grid) _grid.RegisterToGrid(transform);
-    }
-
-    bool ProjectileShooter.IProjectile.CheckCanShoot()
-    {
-        return !_grid.TryGetObjectsOnGridPoint(transform.position, out _);
-    }
 }

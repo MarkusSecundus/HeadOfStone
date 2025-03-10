@@ -15,9 +15,11 @@ namespace Assets.Scripts.DamageSystem
         [SerializeField] DamageType DamageType;
         [SerializeField] UnityEvent<AttackDeclaration, IArmorPiece> OnAttacked; 
 
-        void OnCollisionEnter(Collision collision)
+        void OnCollisionEnter(Collision collision) => DoDamage(IArmorPiece.Get(collision.collider));
+        void OnTriggerEnter(Collider other) => DoDamage(IArmorPiece.Get(other));
+
+        void DoDamage(IArmorPiece armorPiece)
         {
-            var armorPiece = IArmorPiece.Get(collision.collider);
             if (armorPiece.IsNil()) return;
 
             var attackDeclaration = new AttackDeclaration { Attacker = this, Damage = Damage, Type = DamageType };

@@ -36,6 +36,7 @@ public class Grid : MonoBehaviour
         }
 
         public static PlacementDescriptor Default => default;
+        public PlacementDescriptor WithPivot(Transform newPivot) => new PlacementDescriptor(newPivot, Dimensions);
     }
 
 
@@ -54,6 +55,20 @@ public class Grid : MonoBehaviour
         return ret;
     }
 
+    public Vector2Int GetRectSizeInGridPoints(PlacementDescriptor placement, out Vector2 remainder)
+    {
+        placement.GetRectangleEdgePointsWorldspace(out var aWorld, out var bWorld, out var cWorld, out var dWorld);
+        Vector2 a = transform.GlobalToLocal(aWorld).xz(), b = transform.GlobalToLocal(bWorld).xz(), c = transform.GlobalToLocal(cWorld).xz(), d = transform.GlobalToLocal(dWorld).xz();
+        Vector2 min = a.Min(b).Min(c).Min(d);
+        Vector2 max = a.Max(b).Max(c).Max(d);
+        Vector2 dims = max - min;
+        
+        var ret = new Vector2Int(dims.x.DivideWithRemainder(Dimensions.x, out remainder.x), dims.y.DivideWithRemainder(Dimensions.y, out remainder.y));
+        ret += new Vector2Int((int)Mathf.Sign(remainder.x), (int)Mathf.Sign(remainder.y));
+        remainder = Dimensions - remainder;
+        return ret;
+    }
+
     public Vector2Int GetGridCoords(Vector3 pos, out Vector2 offsetFromCellOrigin)
     {
         pos = transform.GlobalToLocal(pos);
@@ -69,7 +84,7 @@ public class Grid : MonoBehaviour
     public bool TryGetObjectsOnGridPoint(Vector2Int gridCoords, out IReadOnlyCollection<Transform> objects)
     {
         objects = default;
-        if (_objectsOnGrid.TryGetValue(gridCoords, out var ret))
+        if (_objectsOnGrid.TryGetValue(gridCoords, out var ret) && ret.Count > 0)
         {
             objects = ret;
             return true;
@@ -112,7 +127,7 @@ public class Grid : MonoBehaviour
         var ret = Interval.Make(aGrid.Min(bGrid).Min(cGrid).Min(dGrid), aGrid.Max(bGrid).Max(cGrid).Max(dGrid));
 
 
-#if true
+#if false
         var (minX, minOffsetX) = Min((aGrid.x, offsetA), Min((bGrid.x, offsetB), Min((cGrid.x, offsetC), (dGrid.x, offsetD))));
         var (minY, minOffsetY) = Min((aGrid.y, offsetA), Min((bGrid.y, offsetB), Min((cGrid.y, offsetC), (dGrid.y, offsetD))));
         var (maxX, maxOffsetX) = Max((aGrid.x, offsetA), Max((bGrid.x, offsetB), Max((cGrid.x, offsetC), (dGrid.x, offsetD))));
@@ -178,11 +193,11 @@ public class Grid : MonoBehaviour
 
         using (GizmoHelpers.ColorScope(Color.green))
         {
-            const int SIZE = 20;
-            for (int t = -SIZE; t < SIZE; ++t)
+            const int SIZE = 20, OVERLAPPED = SIZE + 3;
+            for (int t = -SIZE; t <= SIZE; ++t)
             {
-                Gizmos.DrawLine(GetGridPointOrigin(new Vector2Int(t, -SIZE)), GetGridPointOrigin(new Vector2Int(t, SIZE)));
-                Gizmos.DrawLine(GetGridPointOrigin(new Vector2Int(-SIZE, t)), GetGridPointOrigin(new Vector2Int(SIZE, t)));
+                Gizmos.DrawLine(GetGridPointOrigin(new Vector2Int(t, -OVERLAPPED)), GetGridPointOrigin(new Vector2Int(t, OVERLAPPED)));
+                Gizmos.DrawLine(GetGridPointOrigin(new Vector2Int(-OVERLAPPED, t)), GetGridPointOrigin(new Vector2Int(OVERLAPPED, t)));
             }
         }
     }
