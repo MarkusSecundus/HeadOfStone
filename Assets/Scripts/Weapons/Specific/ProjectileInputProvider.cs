@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileInputProvider : AbstractRedirectedInputProvider<InputAxis>, ProjectileShooter.IProjectile
+public class ProjectileInputProvider : AbstractRedirectedInputProvider<InputAxis>, ProjectileShooterBase.IProjectile
 {
     IInputProvider<InputAxis> _sourceField;
     protected override IInputProvider<InputAxis> _source => _sourceField;
 
-    public void OnShot(ProjectileShooter weapon)
+    public void OnShot(ProjectileShooterBase weapon)
     {
         _sourceField = IInputProvider<InputAxis>.Get(weapon);
     }

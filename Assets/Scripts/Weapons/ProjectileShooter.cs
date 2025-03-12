@@ -10,11 +10,11 @@ using System.Linq;
 
 
 
-public class ProjectileShooter : MonoBehaviour
+public abstract class ProjectileShooterBase : MonoBehaviour
 {
     public interface IProjectile
     {
-        public void OnShot(ProjectileShooter weapon);
+        public void OnShot(ProjectileShooterBase weapon);
 
         public bool CheckCanShoot() => true;
     }
@@ -26,12 +26,12 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] Rigidbody BulletPrototype;
     IProjectile[] _bulletPrototypeScripts;
 
-    [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
-    IInputProvider<InputAxis> _input;
     WeaponDescriptor _weaponDescriptor;
 
 
     LinkedList<Rigidbody> _projectiles = new();
+
+    
 
     void _removeDeadProjectiles()
     {
@@ -43,9 +43,8 @@ public class ProjectileShooter : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        _input = IInputProvider<InputAxis>.Get(this);
         _weaponDescriptor = GetComponentInParent<WeaponDescriptor>();
         _bulletPrototypeScripts = BulletPrototype.GetComponentsInChildren<IProjectile>(true);
 
@@ -60,9 +59,11 @@ public class ProjectileShooter : MonoBehaviour
         }
     }
 
+    protected abstract bool CheckIsShootingRequested();
+
     private void Update()
     {
-        if (_input.GetKeyDown(KeyToShoot))
+        if (CheckIsShootingRequested())
                 DoShoot();
     }
 
@@ -101,4 +102,17 @@ public class ProjectileShooter : MonoBehaviour
             bullet.AddForce(shootForce, ForceMode.Impulse);
         }
     }
+}
+
+public class ProjectileShooter : ProjectileShooterBase
+{
+    [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
+    IInputProvider<InputAxis> _input;
+
+    protected override void Start()
+    {
+        _input = IInputProvider<InputAxis>.Get(this);
+        base.Start();
+    }
+    protected override bool CheckIsShootingRequested() => _input.GetKeyDown(KeyToShoot);
 }

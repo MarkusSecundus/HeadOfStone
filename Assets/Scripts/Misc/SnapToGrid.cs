@@ -31,6 +31,8 @@ public class SnapToGrid : MonoBehaviour
         if (_shouldSnapOnStart) DoSnap();
     }
 
+    public Vector3 GetGridPosition() => Grid.GetGridPosition(Placement);
+
     public void DoSnap()
     {
         if (Grid)

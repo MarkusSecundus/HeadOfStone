@@ -6282,6 +6282,16 @@ PrefabInstance:
       propertyPath: _shouldDrawGizmo
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7458524130764210476, guid: d542d1e1b474e3e46ad043ca7fbea784,
+        type: 3}
+      propertyPath: _shouldSnapOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458524130764210476, guid: d542d1e1b474e3e46ad043ca7fbea784,
+        type: 3}
+      propertyPath: _shouldRegisterToGrid
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9088806467273694769, guid: d542d1e1b474e3e46ad043ca7fbea784,
         type: 3}
       propertyPath: m_Name
@@ -12980,6 +12990,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _shouldDrawGizmo
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458524130764210476, guid: d542d1e1b474e3e46ad043ca7fbea784,
+        type: 3}
+      propertyPath: _shouldSnapOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458524130764210476, guid: d542d1e1b474e3e46ad043ca7fbea784,
+        type: 3}
+      propertyPath: _shouldRegisterToGrid
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9088806467273694769, guid: d542d1e1b474e3e46ad043ca7fbea784,
         type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8753884558875133846}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BottomPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1118674034414983561}
   - component: {fileID: 6497966766546431685}
   - component: {fileID: 3074266576370992427}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 8511221315259617208}
   - component: {fileID: 5100610738983693008}
   - component: {fileID: 5728923703259803837}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Gunpowder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

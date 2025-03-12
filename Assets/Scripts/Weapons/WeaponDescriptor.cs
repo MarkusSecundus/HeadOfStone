@@ -12,9 +12,9 @@ public class WeaponDescriptor : MonoBehaviour
     public int MaxAmmo;
     public bool IsEnabled = false;
 
-    [SerializeField] int _currentAmmo = -1;
-    public int CurrentAmmo { get => _currentAmmo < 0 ? _currentAmmo = MaxAmmo : _currentAmmo; private set => _currentAmmo = value; }
-    public bool HasAmmo => CurrentAmmo != 0;
+    [SerializeField] float _currentAmmo = -1f;
+    public float CurrentAmmo { get => _currentAmmo < 0f ? _currentAmmo = MaxAmmo : _currentAmmo; private set => _currentAmmo = value; }
+    public bool HasAmmo => CurrentAmmo != 0f;
     public bool HasInfiniteAmmo => MaxAmmo < 0;
 
     public UnityEvent<WeaponDescriptor> OnStateUpdated;
@@ -24,12 +24,13 @@ public class WeaponDescriptor : MonoBehaviour
         public int OriginalAmmo { get; init; }
     }
 
-    public bool AddAmmo(int amount)
+    public bool AddAmmo(float amount)
     {
         if (HasInfiniteAmmo) return true;
+        if (amount == 0f) return true;
 
         var oldAmmo = CurrentAmmo;
-        var newAmmo = CurrentAmmo = Mathf.Clamp(oldAmmo + amount, 0, MaxAmmo);
+        var newAmmo = CurrentAmmo = Mathf.Clamp(oldAmmo + amount, 0f, MaxAmmo);
         OnStateUpdated?.Invoke(this);
         return oldAmmo != newAmmo;
     }
