@@ -24,6 +24,8 @@ public class ContinuousShapecastShooter : MonoBehaviour
     IInputProvider<InputAxis> _input;
     WeaponDescriptor _weapon;
 
+    [SerializeField] ParticleSystem _particles;
+
     float _intensity = 0f;
 
     DefaultValDict<Damageable, HashSet<IArmorPiece>> _affectedDamageables = new(d=>new());
@@ -49,11 +51,18 @@ public class ContinuousShapecastShooter : MonoBehaviour
 
     ShapeListener _shapeListener;
 
+    float _maxEmissionRate;
     private void Start()
     {
         _weapon = GetComponent<WeaponDescriptor>();
         _input = IInputProvider<InputAxis>.Get(this);
         _shape.RegisterListener(_shapeListener = new(this));
+        {
+            _maxEmissionRate = _particles.emission.rateOverTimeMultiplier;
+            var emission = _particles.emission;
+            emission.rateOverTimeMultiplier = 0f;
+        }
+        Debug.Log($"emission rate: {_maxEmissionRate}", this);
     }
 
     private void OnDestroy()
@@ -66,6 +75,11 @@ public class ContinuousShapecastShooter : MonoBehaviour
         bool isActivated = _input.GetKey(_triggerKey) && _weapon.AddAmmo(-AmmoPerSecond * Time.deltaTime);
         float change = (1f / ( isActivated ? _buildupTime_seconds : -_fadeTime_seconds));
         _intensity = (_intensity + change * Time.deltaTime).Clamp01();
+        {
+            var emission = _particles.emission;
+            //emission.enabled = (_intensity > 0f);
+            emission.rateOverTimeMultiplier = _maxEmissionRate * _intensity;
+        }
 
         if (_intensity <= 0f) return;
         if (_affectedDamageables.IsEmpty()) return;
@@ -83,6 +97,7 @@ public class ContinuousShapecastShooter : MonoBehaviour
             }
 
             float damagePerPiece = damage / armors.Count;
+            if (damagePerPiece == 0f) continue;
             foreach(var armor in armors)
                 armor.Attack(new AttackDeclaration { Attacker = this, Damage = damagePerPiece, Type = DamageType });
         }

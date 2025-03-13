@@ -43,8 +43,7 @@ GameObject:
   - component: {fileID: 7212595746584253274}
   - component: {fileID: 1118674034414983561}
   - component: {fileID: 6787201401429089321}
-  - component: {fileID: 6497966766546431685}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,24 +138,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &6497966766546431685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954796599229980703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ce7d33520e8d2448a749474397a033, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageMultiplier: 1
-  DamageModifiers:
-    values: []
-  OnAttacked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &9088806467273694769
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 581707743733108991}
   - component: {fileID: 1581997468058388553}
+  - component: {fileID: 7452092651405711005}
   - component: {fileID: 2458800434177907939}
   - component: {fileID: 148635047331441794}
   - component: {fileID: 7229607876779017570}
@@ -237,6 +219,24 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7452092651405711005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9088806467273694769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ce7d33520e8d2448a749474397a033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageMultiplier: 1
+  DamageModifiers:
+    values: []
+  OnAttacked:
     m_PersistentCalls:
       m_Calls: []
 --- !u!208 &2458800434177907939
