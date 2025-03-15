@@ -8,29 +8,23 @@ using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
-public class ContinuousShapecastShooter : MonoBehaviour
+public abstract class ContinuousShapecastShooterBase : MonoBehaviour
 {
     [SerializeField] float DamagePerSecond;
     [SerializeField] DamageType DamageType;
-    [SerializeField] float AmmoPerSecond;
 
     [SerializeField] ColliderActivityTracker _shape;
 
-    [SerializeField] float _buildupTime_seconds;
-    [SerializeField] float _fadeTime_seconds;
-
-    [SerializeField] KeyCode _triggerKey = KeyCode.Mouse0;
-    IInputProvider<InputAxis> _input;
-    WeaponDescriptor _weapon;
 
     [SerializeField] ParticleSystem _particles;
 
-    float _intensity = 0f;
+    protected abstract float Intensity { get; }
 
     DefaultValDict<Damageable, HashSet<IArmorPiece>> _affectedDamageables = new(d=>new());
 
-    record ShapeListener(ContinuousShapecastShooter Base) : IColliderActivityInfo
+    record ShapeListener(ContinuousShapecastShooterBase Base) : IColliderActivityInfo
     {
         public void Enter(Collider other)
         {
@@ -52,17 +46,15 @@ public class ContinuousShapecastShooter : MonoBehaviour
     ShapeListener _shapeListener;
 
     float _maxEmissionRate;
-    private void Start()
+    protected virtual void Start()
     {
-        _weapon = GetComponent<WeaponDescriptor>();
-        _input = IInputProvider<InputAxis>.Get(this);
-        _shape.RegisterListener(_shapeListener = new(this));
-        {
-            _maxEmissionRate = _particles.emission.rateOverTimeMultiplier;
+        if(_shape) _shape.RegisterListener(_shapeListener = new(this));
+        if(_particles)
+        { 
             var emission = _particles.emission;
+            _maxEmissionRate = emission.rateOverTimeMultiplier;
             emission.rateOverTimeMultiplier = 0f;
         }
-        Debug.Log($"emission rate: {_maxEmissionRate}", this);
     }
 
     private void OnDestroy()
@@ -70,21 +62,18 @@ public class ContinuousShapecastShooter : MonoBehaviour
         if(_shape) _shape.UnregisterListener(_shapeListener);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        bool isActivated = _input.GetKey(_triggerKey) && _weapon.AddAmmo(-AmmoPerSecond * Time.deltaTime);
-        float change = (1f / ( isActivated ? _buildupTime_seconds : -_fadeTime_seconds));
-        _intensity = (_intensity + change * Time.deltaTime).Clamp01();
-        {
+        if(_particles)
+        { 
             var emission = _particles.emission;
-            //emission.enabled = (_intensity > 0f);
-            emission.rateOverTimeMultiplier = _maxEmissionRate * _intensity;
+            emission.rateOverTimeMultiplier = _maxEmissionRate * Intensity;
         }
 
-        if (_intensity <= 0f) return;
+        if (Intensity <= 0f) return;
         if (_affectedDamageables.IsEmpty()) return;
 
-        float damage = DamagePerSecond * _intensity * Time.deltaTime;
+        float damage = DamagePerSecond * Intensity * Time.deltaTime;
 
         HashSet<Damageable> deadEntities = null;
 
@@ -103,5 +92,39 @@ public class ContinuousShapecastShooter : MonoBehaviour
         }
         if(deadEntities != null) foreach (var dead in deadEntities) _affectedDamageables.Remove(dead);
 
+    }
+}
+
+
+
+public class ContinuousShapecastShooter : ContinuousShapecastShooterBase
+{
+    [SerializeField] float _buildupTime_seconds;
+    [SerializeField] float _fadeTime_seconds;
+    [SerializeField] float AmmoPerSecond;
+
+    [SerializeField] KeyCode _triggerKey = KeyCode.Mouse0;
+    IInputProvider<InputAxis> _input;
+    WeaponDescriptor _weapon;
+
+
+
+    float _intensity = 0f;
+    protected override float Intensity => _intensity;
+
+    protected override void Start()
+    {
+        base.Start();
+        _weapon = GetComponent<WeaponDescriptor>();
+        _input = IInputProvider<InputAxis>.Get(this);
+    }
+
+    protected override void Update()
+    {
+        bool isActivated = _input.GetKey(_triggerKey) && _weapon.AddAmmo(-AmmoPerSecond * Time.deltaTime);
+        float change = (1f / (isActivated ? _buildupTime_seconds : -_fadeTime_seconds));
+        _intensity = (_intensity + change * Time.deltaTime).Clamp01();
+
+        base.Update();
     }
 }
