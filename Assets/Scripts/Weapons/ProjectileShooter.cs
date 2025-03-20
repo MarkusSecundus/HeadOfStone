@@ -68,7 +68,7 @@ public abstract class ProjectileShooterBase : MonoBehaviour
     }
 
     double _nextPermittedShotTime = double.NegativeInfinity;
-    void DoShoot()
+    public void DoShoot()
     {
         _removeDeadProjectiles();
         if (MaxProjectilesInExistence >= 0 && _projectiles.Count >= MaxProjectilesInExistence)
@@ -85,7 +85,7 @@ public abstract class ProjectileShooterBase : MonoBehaviour
         }
         _nextPermittedShotTime = Time.timeAsDouble + Cooldown_seconds;
 
-        if (!_weaponDescriptor.AddAmmo(-1))
+        if (_weaponDescriptor?.AddAmmo(-1) == false)
             return;
 
         var bullet = Instantiate(BulletPrototype, null);
@@ -114,5 +114,5 @@ public class ProjectileShooter : ProjectileShooterBase
         _input = IInputProvider<InputAxis>.Get(this);
         base.Start();
     }
-    protected override bool CheckIsShootingRequested() => _input.GetKeyDown(KeyToShoot);
+    protected override bool CheckIsShootingRequested() => _input?.GetKeyDown(KeyToShoot) == true;
 }

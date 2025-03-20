@@ -6,10 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class ZombieController : MonoBehaviour
 {
-    [SerializeField] IOnRequestDamager _damager;
+    [SerializeField] float DistanceToAttack = 0f;
+    [SerializeField] UnityEvent OnAttack;
 
     ITargetProvider _targetProvider;
 
@@ -20,7 +22,7 @@ public class ZombieController : MonoBehaviour
         _navAgent = GetComponent<NavMeshAgent>();
         _targetProvider = GetComponentInChildren<ITargetProvider>();
         _animationLogic = GetComponentInChildren<ZombieAnimationController>();
-        _animationLogic.OnAttackSignal.AddListener(_damager.PerformAttack);
+        _animationLogic.OnAttackSignal.AddListener(OnAttack.Invoke);
     }
     bool isDead = false;
     void Update()
@@ -35,7 +37,7 @@ public class ZombieController : MonoBehaviour
         float movementSpeed = _navAgent.velocity.magnitude;
         float remainingDistance = _navAgent.GetRemainingDistanceUntilStop();
 
-        _animationLogic.UpdateAnimation((_targetProvider.Target && remainingDistance <= Mathf.Epsilon), movementSpeed);
+        _animationLogic.UpdateAnimation((_targetProvider.Target && remainingDistance <= (DistanceToAttack + Mathf.Epsilon)), movementSpeed);
     }
     public void Die()
     {
