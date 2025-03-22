@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{02ef2bae-86af-4002-8ea0-906b7371fdda}">
+		<property name="assetPath">
+			<value>Guns/Shotgun3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.1808125</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2984de82-c60e-4504-9999-9799de1b18ee}</destination>
+		</relationship>
+	</object>
+</objects>

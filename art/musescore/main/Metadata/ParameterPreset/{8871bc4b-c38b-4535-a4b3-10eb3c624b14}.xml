@@ -21,22 +21,22 @@
 		<property name="isGlobal">
 			<value>true</value>
 		</property>
-		<property name="isHeld">
-			<value>true</value>
-		</property>
 		<property name="initialValue">
 			<value>0</value>
 		</property>
 		<property name="isExposedRecursively">
 			<value>false</value>
 		</property>
-		<relationship name="automators">
-			<destination>{1c54ed23-96e5-486b-92bb-49e1d392edf6}</destination>
+		<relationship name="modulators">
+			<destination>{109aa24d-699e-4ca1-b9ea-70ab37ea758f}</destination>
 		</relationship>
 	</object>
-	<object class="Automator" id="{1c54ed23-96e5-486b-92bb-49e1d392edf6}">
-		<property name="nameOfPropertyBeingAutomated">
+	<object class="SeekModulator" id="{109aa24d-699e-4ca1-b9ea-70ab37ea758f}">
+		<property name="nameOfPropertyBeingModulated">
 			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>0.47999998927116394</value>
 		</property>
 	</object>
 </objects>

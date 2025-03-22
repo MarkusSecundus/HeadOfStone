@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{1a1306c4-2b2b-411e-bcb0-98b53212230e}">
+		<property name="assetPath">
+			<value>Guns/778561__blondpanda__steps_fine_snow_or_sand_strong_22.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.74643749999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2984de82-c60e-4504-9999-9799de1b18ee}</destination>
+		</relationship>
+	</object>
+</objects>

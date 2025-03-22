@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e738516a-0f63-4dd4-99f3-4579ee0e2a48}">
+		<property name="assetPath">
+			<value>Guns/Explosion/560577__theplax__explosion-2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.6191383219954649</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2984de82-c60e-4504-9999-9799de1b18ee}</destination>
+		</relationship>
+	</object>
+</objects>
