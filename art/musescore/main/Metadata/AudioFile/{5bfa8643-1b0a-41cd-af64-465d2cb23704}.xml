@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{9c76ed59-5e2d-421a-a34e-13d756099bd0}">
+	<object class="AudioFile" id="{5bfa8643-1b0a-41cd-af64-465d2cb23704}">
 		<property name="assetPath">
-			<value>UI/01-514271__jtn191__regen-healing3b.wav</value>
+			<value>Zombie/01-01-577032__highpixel__maledeathsound13-short.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
 			<value>1</value>
 		</property>
 		<property name="length">
-			<value>1.3441043083900226</value>
+			<value>0.454125</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{2984de82-c60e-4504-9999-9799de1b18ee}</destination>

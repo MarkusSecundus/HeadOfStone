@@ -82,7 +82,11 @@
 			<destination>{bed2acf9-1bcc-4877-979e-e248b19e14fd}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{c1c96225-3a98-449a-91f8-cdcecc25026e}" />
+	<object class="MultiSound" id="{c1c96225-3a98-449a-91f8-cdcecc25026e}">
+		<relationship name="sounds">
+			<destination>{a400a812-1b97-4d3f-9bbc-906d895e43b7}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{dbd4adcb-87c1-446a-a8f4-87c90d6e0a9d}">
 		<relationship name="effects">
 			<destination>{c4c03f7d-1d7c-4a23-a585-2bc38e45684b}</destination>
@@ -93,10 +97,53 @@
 		<relationship name="effects">
 			<destination>{a20ee96c-17ce-4cde-8ff6-029d365b5eda}</destination>
 			<destination>{37eb8c91-e886-44cf-87a3-392afbc83be3}</destination>
+			<destination>{bd19fa85-9fbe-4432-9fab-7a2e8c1f9449}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{35e36300-2ecb-4464-a052-8ddb8a112159}" />
+	<object class="SingleSound" id="{a400a812-1b97-4d3f-9bbc-906d895e43b7}">
+		<relationship name="modulators">
+			<destination>{ffce8158-1a53-4b56-9b1a-7f045a56a492}</destination>
+			<destination>{f7dca6f0-51a0-4bef-8dd0-6083d3dafbfb}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{9067bec7-db60-442b-990e-9bd4ed1376f9}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{c4c03f7d-1d7c-4a23-a585-2bc38e45684b}" />
 	<object class="MixerBusFader" id="{a20ee96c-17ce-4cde-8ff6-029d365b5eda}" />
 	<object class="SpatialiserEffect" id="{37eb8c91-e886-44cf-87a3-392afbc83be3}" />
+	<object class="MultibandEqEffect" id="{bd19fa85-9fbe-4432-9fab-7a2e8c1f9449}">
+		<property name="frequencyA">
+			<value>3319.36743</value>
+		</property>
+		<property name="qualityA">
+			<value>0.381178379</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{ffce8158-1a53-4b56-9b1a-7f045a56a492}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>140</value>
+		</property>
+		<property name="releaseTime">
+			<value>80</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{f7dca6f0-51a0-4bef-8dd0-6083d3dafbfb}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>11</value>
+		</property>
+	</object>
 </objects>

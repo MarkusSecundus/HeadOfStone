@@ -82,7 +82,15 @@
 			<destination>{3d56f381-e0b0-49d1-afb8-89d6289150f2}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{09d10b0a-df89-479d-b8f7-3eb24f40174b}" />
+	<object class="MultiSound" id="{09d10b0a-df89-479d-b8f7-3eb24f40174b}">
+		<property name="playbackMode">
+			<value>1</value>
+		</property>
+		<relationship name="sounds">
+			<destination>{c81ac2b0-58bb-4b9b-a7a1-ebd99157ef0d}</destination>
+			<destination>{8eb9e455-6bfe-4e48-99c1-4683fdb1f09f}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{7aa083cf-8d7d-49d3-8e40-a878fcea82b0}">
 		<relationship name="effects">
 			<destination>{310789a6-6511-4e27-a00f-a8d44d15f2cf}</destination>
@@ -93,10 +101,57 @@
 		<relationship name="effects">
 			<destination>{6ffa1e93-b052-4d54-aff3-1f38c215cd9c}</destination>
 			<destination>{1cd4ae43-6374-4f81-bc88-8c5f439ba144}</destination>
+			<destination>{3dabc07a-13f2-4db9-b39c-ed2118504cfa}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ca5e98d1-c6e0-4e50-9604-7f728d1249a6}" />
+	<object class="SingleSound" id="{c81ac2b0-58bb-4b9b-a7a1-ebd99157ef0d}">
+		<relationship name="modulators">
+			<destination>{8f824ea0-b626-4e93-a4bc-521eefc3765f}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{9f2a2579-dec5-435e-8542-7296f5b119fb}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{8eb9e455-6bfe-4e48-99c1-4683fdb1f09f}">
+		<property name="volume">
+			<value>-8.5</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{fdf6b4f7-ff02-4035-abd5-b9ea05ca3ee8}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{e0051e75-d9cf-4abf-8f4c-b8ec4b2a3b47}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{310789a6-6511-4e27-a00f-a8d44d15f2cf}" />
 	<object class="MixerBusFader" id="{6ffa1e93-b052-4d54-aff3-1f38c215cd9c}" />
 	<object class="SpatialiserEffect" id="{1cd4ae43-6374-4f81-bc88-8c5f439ba144}" />
+	<object class="MultibandEqEffect" id="{3dabc07a-13f2-4db9-b39c-ed2118504cfa}">
+		<property name="filterTypeA">
+			<value>10</value>
+		</property>
+		<property name="frequencyA">
+			<value>811.292664</value>
+		</property>
+		<property name="qualityA">
+			<value>0.775126398</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{8f824ea0-b626-4e93-a4bc-521eefc3765f}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>26.5</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{fdf6b4f7-ff02-4035-abd5-b9ea05ca3ee8}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>17</value>
+		</property>
+	</object>
 </objects>

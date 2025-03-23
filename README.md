@@ -20,6 +20,9 @@ Shoot-em-up game inspired by the flash classic Boxhead
  - Zombie:
 	- Zombie_Attack: LittleRobotSoundFactory ( https://freesound.org/people/LittleRobotSoundFactory/sounds/316214/ )
 	- Zombie_Idle|Attack: Slave2theLight ( https://freesound.org/people/Slave2theLight/sounds/157066/ )
+ - Devil:
+	- Fireball Throw: HighPixel ( https://freesound.org/people/HighPixel/sounds/431174/ )
+	- Idle, Hurt, Death: MuseScore MS Basic - Barytone Voice
  - Shotgun:
 	- 1LOVE ( https://freesound.org/people/1LOVE/sounds/724521/ )
 	- Artninja ( https://freesound.org/people/Artninja/sounds/700242/ )
@@ -34,7 +37,8 @@ Shoot-em-up game inspired by the flash classic Boxhead
  - Pickups:
 	- Health: jtn191 ( https://freesound.org/people/jtn191/sounds/514271/ )
 	- Barrel place: breviceps ( https://freesound.org/people/jtn191/sounds/514271/ )   
-	     
+	       
+		 
 > _All of the sounds might have been slightly modified in Audacity, with additional equalization, pitch shifting etc. being done at runtime by FMOD._
 
     

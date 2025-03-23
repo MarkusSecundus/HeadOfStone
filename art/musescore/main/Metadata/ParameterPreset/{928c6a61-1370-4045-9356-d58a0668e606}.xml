@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{928c6a61-1370-4045-9356-d58a0668e606}">
+		<property name="name">
+			<value>DevilPitchShift</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ecc1ad8f-1d77-4404-8f45-cd6cd2e6979f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{21c3b9e1-4584-4003-8bf1-04dd8baaa286}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{21c3b9e1-4584-4003-8bf1-04dd8baaa286}">
+		<property name="isReadOnly">
+			<value>true</value>
+		</property>
+		<property name="isHeld">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0.5</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{a97006c4-b2d1-498c-a393-ad23d4957f44}</destination>
+		</relationship>
+	</object>
+	<object class="RandomizerModulator" id="{a97006c4-b2d1-498c-a393-ad23d4957f44}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="amount">
+			<value>100</value>
+		</property>
+	</object>
+</objects>
