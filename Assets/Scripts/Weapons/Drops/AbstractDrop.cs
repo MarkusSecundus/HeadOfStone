@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class AbstractDrop : MonoBehaviour
 {
+    [SerializeField] UnityEvent OnPicked;
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -19,6 +22,7 @@ public abstract class AbstractDrop : MonoBehaviour
 
         if (ApplyDrop(player))
         {
+            OnPicked?.Invoke();
             Destroy(this.gameObject);
         }
 

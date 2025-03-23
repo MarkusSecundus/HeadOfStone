@@ -353,6 +353,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581707743733108991}
     m_Modifications:
+    - target: {fileID: 884361296883012776, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: _sound.Path
+      value: event:/Sounds/Dwarf/Weapons/Barrel_Explode
+      objectReference: {fileID: 0}
+    - target: {fileID: 884361296883012776, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: _sound.Guid.Data1
+      value: -1110537875
+      objectReference: {fileID: 0}
+    - target: {fileID: 884361296883012776, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: _sound.Guid.Data2
+      value: 1287002563
+      objectReference: {fileID: 0}
+    - target: {fileID: 884361296883012776, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: _sound.Guid.Data3
+      value: -1881890406
+      objectReference: {fileID: 0}
+    - target: {fileID: 884361296883012776, guid: 2972a8900c1b04a48a04831490c2eed5,
+        type: 3}
+      propertyPath: _sound.Guid.Data4
+      value: -1246696323
+      objectReference: {fileID: 0}
     - target: {fileID: 3990876419981158602, guid: 2972a8900c1b04a48a04831490c2eed5,
         type: 3}
       propertyPath: m_Name

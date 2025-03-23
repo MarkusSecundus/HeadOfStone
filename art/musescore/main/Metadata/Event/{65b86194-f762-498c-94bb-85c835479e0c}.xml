@@ -226,7 +226,20 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{3c4a5fb9-58c3-4e78-8fcc-e3808d0596da}" />
-	<object class="SpatialiserEffect" id="{368a16d6-6d9d-401b-8a01-d35afd9a7fb4}" />
+	<object class="SpatialiserEffect" id="{368a16d6-6d9d-401b-8a01-d35afd9a7fb4}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>4.4000001</value>
+		</property>
+		<property name="minimumExtent">
+			<value>20</value>
+		</property>
+	</object>
 	<object class="TremoloEffect" id="{e214c95d-b10e-4e59-b69f-143fe9d69c23}">
 		<property name="bypass">
 			<value>true</value>

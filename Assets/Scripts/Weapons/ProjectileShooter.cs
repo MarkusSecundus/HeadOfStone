@@ -7,6 +7,7 @@ using Assets.Scripts.IO;
 using MarkusSecundus.Utils.Input;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Linq;
+using UnityEngine.Events;
 
 
 
@@ -24,6 +25,10 @@ public abstract class ProjectileShooterBase : MonoBehaviour
     [SerializeField] int MaxProjectilesInExistence = -1;
     [SerializeField] Transform ShootDirection;
     [SerializeField] Rigidbody BulletPrototype;
+
+    [SerializeField] UnityEvent OnAttack;
+    [SerializeField] UnityEvent OnAttackOutOfAmmo;
+
     IProjectile[] _bulletPrototypeScripts;
 
     WeaponDescriptor _weaponDescriptor;
@@ -74,6 +79,7 @@ public abstract class ProjectileShooterBase : MonoBehaviour
         if (MaxProjectilesInExistence >= 0 && _projectiles.Count >= MaxProjectilesInExistence)
         {
             Debug.Log($"Cannot shoot - max projectiles in existence count reached!");
+            OnAttackOutOfAmmo?.Invoke();
             return;
         }
         if (Time.timeAsDouble < _nextPermittedShotTime)
@@ -81,12 +87,16 @@ public abstract class ProjectileShooterBase : MonoBehaviour
         if (_bulletPrototypeScripts?.Length > 0 && _bulletPrototypeScripts.Any(sc => !sc.CheckCanShoot()))
         {
             Debug.Log($"Cannot shoot - Bullet refuses!");
+            OnAttackOutOfAmmo?.Invoke();
             return;
         }
         _nextPermittedShotTime = Time.timeAsDouble + Cooldown_seconds;
 
         if (_weaponDescriptor?.AddAmmo(-1) == false)
+        {
+            OnAttackOutOfAmmo?.Invoke();
             return;
+        }
 
         var bullet = Instantiate(BulletPrototype, null);
         bullet.transform.position = BulletPrototype.transform.position;
@@ -101,6 +111,7 @@ public abstract class ProjectileShooterBase : MonoBehaviour
             var shootForce = (ShootDirection.position - transform.position).normalized * ShootForce;
             bullet.AddForce(shootForce, ForceMode.Impulse);
         }
+        OnAttack?.Invoke();
     }
 }
 

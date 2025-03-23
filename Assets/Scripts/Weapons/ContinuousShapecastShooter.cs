@@ -8,6 +8,7 @@ using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Windows;
 
 public abstract class ContinuousShapecastShooterBase : MonoBehaviour
@@ -20,23 +21,32 @@ public abstract class ContinuousShapecastShooterBase : MonoBehaviour
 
     [SerializeField] ParticleSystem _particles;
 
-    protected abstract float Intensity { get; }
+    [SerializeField] protected UnityEvent OnAttack;
+    [SerializeField] protected UnityEvent OnAttackOutOfAmmo;
+
+    [SerializeField] float _buildupTime_seconds;
+    [SerializeField] float _fadeTime_seconds;
+
+    float _intensity = 0f;
+    protected float Intensity => _intensity;
 
     DefaultValDict<Damageable, HashSet<IArmorPiece>> _affectedDamageables = new(d=>new());
+
+
 
     record ShapeListener(ContinuousShapecastShooterBase Base) : IColliderActivityInfo
     {
         public void Enter(Collider other)
         {
             IArmorPiece armor = IArmorPiece.Get(other);
-            if (armor.IsNil()) return;
+            if (armor.IsNil() || armor.Damageable.IsNil()) return;
             Base._affectedDamageables[armor.Damageable].Add(armor);
         }
 
         public void Exit(Collider other)
         {
             IArmorPiece armor = IArmorPiece.Get(other);
-            if (armor.IsNil()) return;
+            if (armor.IsNil() || armor.Damageable.IsNil()) return;
             if (!Base._affectedDamageables.TryGetValue(armor.Damageable, out var armors)) return;
             armors.Remove(armor);
             if (armors.Count <= 0) Base._affectedDamageables.Remove(armor.Damageable);
@@ -64,7 +74,11 @@ public abstract class ContinuousShapecastShooterBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(_particles)
+        bool isActivated = CheckIsActivated();
+        float change = (1f / (isActivated ? _buildupTime_seconds : -_fadeTime_seconds));
+        _intensity = (_intensity + change * Time.deltaTime).Clamp01();
+
+        if (_particles)
         { 
             var emission = _particles.emission;
             emission.rateOverTimeMultiplier = _maxEmissionRate * Intensity;
@@ -91,26 +105,35 @@ public abstract class ContinuousShapecastShooterBase : MonoBehaviour
                 armor.Attack(new AttackDeclaration { Attacker = this, Damage = damagePerPiece, Type = DamageType });
         }
         if(deadEntities != null) foreach (var dead in deadEntities) _affectedDamageables.Remove(dead);
-
+        OnAttack?.Invoke();
     }
+
+    protected abstract bool CheckIsActivated();
 }
 
 
 
 public class ContinuousShapecastShooter : ContinuousShapecastShooterBase
 {
-    [SerializeField] float _buildupTime_seconds;
-    [SerializeField] float _fadeTime_seconds;
-    [SerializeField] float AmmoPerSecond;
 
+    [SerializeField] float AmmoPerSecond;
     [SerializeField] KeyCode _triggerKey = KeyCode.Mouse0;
     IInputProvider<InputAxis> _input;
     WeaponDescriptor _weapon;
 
 
 
-    float _intensity = 0f;
-    protected override float Intensity => _intensity;
+    protected override bool CheckIsActivated()
+    {
+        if (_input.GetKey(_triggerKey))
+        {
+            if (_weapon.AddAmmo(-AmmoPerSecond * Time.deltaTime))
+                return true;
+            OnAttackOutOfAmmo?.Invoke();
+            return false;
+        }
+        return false;
+    }
 
     protected override void Start()
     {
@@ -121,10 +144,6 @@ public class ContinuousShapecastShooter : ContinuousShapecastShooterBase
 
     protected override void Update()
     {
-        bool isActivated = _input.GetKey(_triggerKey) && _weapon.AddAmmo(-AmmoPerSecond * Time.deltaTime);
-        float change = (1f / (isActivated ? _buildupTime_seconds : -_fadeTime_seconds));
-        _intensity = (_intensity + change * Time.deltaTime).Clamp01();
-
         base.Update();
     }
 }

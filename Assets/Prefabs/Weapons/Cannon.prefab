@@ -73,6 +73,12 @@ MonoBehaviour:
   MaxProjectilesInExistence: 2
   ShootDirection: {fileID: 5643127535598538376}
   BulletPrototype: {fileID: 9135168016680272493}
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
   KeyToShoot: 323
 --- !u!1 &5722564645956313688
 GameObject:
@@ -91,7 +97,7 @@ GameObject:
   - component: {fileID: 2558766060415817997}
   - component: {fileID: 7703581253386654856}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Cannonball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

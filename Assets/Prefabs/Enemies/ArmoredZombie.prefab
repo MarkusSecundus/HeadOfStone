@@ -360,7 +360,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnAttackSignal:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2588496896613003700}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeathSignal:
     m_PersistentCalls:
       m_Calls:
@@ -381,6 +393,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1164992344925229129}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -430,6 +454,7 @@ Transform:
   - {fileID: 1722093975647854554}
   - {fileID: 1488358430337966245}
   - {fileID: 2233820925792326069}
+  - {fileID: 7872827839769685965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6414186624529249824
@@ -516,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7d3b2e3e4271141a0a8c0f18fa37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DistanceToAttack: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls:
@@ -564,7 +590,19 @@ MonoBehaviour:
       m_Calls: []
   OnDamaged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3909717380687553404}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.7
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHealed:
     m_PersistentCalls:
       m_Calls: []
@@ -6003,6 +6041,203 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8725609220380552187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6142005690356714179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7872827839769685965}
+  - component: {fileID: 8972734370554590943}
+  - component: {fileID: 3909717380687553404}
+  - component: {fileID: 1164992344925229129}
+  - component: {fileID: 2588496896613003700}
+  - component: {fileID: 8606311200959682219}
+  m_Layer: 10
+  m_Name: Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7872827839769685965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142005690356714179}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5356117818319033904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8972734370554590943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142005690356714179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: 1733611782
+      Data2: 1215465988
+      Data3: -866157659
+      Data4: 1700120394
+    Path: event:/Sounds/Enemies/ArmoredZombie/Idle
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &3909717380687553404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142005690356714179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: -1728559585
+      Data2: 1220362883
+      Data3: -1637659239
+      Data4: 171837999
+    Path: event:/Sounds/Enemies/ArmoredZombie/Hurt
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &1164992344925229129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142005690356714179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: 130720429
+      Data2: 1160836254
+      Data3: 1213126552
+      Data4: -1795112471
+    Path: event:/Sounds/Enemies/ArmoredZombie/Die
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &2588496896613003700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142005690356714179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: -671534972
+      Data2: 1278655000
+      Data3: 613283478
+      Data4: -1503694204
+    Path: event:/Sounds/Enemies/ArmoredZombie/Attack
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &8606311200959682219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142005690356714179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64535961a861234da7be2b9ed248b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8972734370554590943}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: StartPlaying
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8972734370554590943}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6242891071981383140
 GameObject:
   m_ObjectHideFlags: 0

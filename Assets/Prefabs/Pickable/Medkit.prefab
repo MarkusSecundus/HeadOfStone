@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8887190449574116678}
   - component: {fileID: 229188420362267228}
   - component: {fileID: 4104384078310905863}
+  - component: {fileID: 1329973179386704414}
   m_Layer: 0
   m_Name: Medkit
   m_TagString: Untagged
@@ -166,4 +167,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8511fef04187d2440a18a37d067a2588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1329973179386704414}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   HP: 30
+--- !u!114 &1329973179386704414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6147202197099192366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: -571314607
+      Data2: 1208207557
+      Data3: 500289714
+      Data4: -750315098
+    Path: event:/Sounds/Dwarf/Weapons/Medkit_Pickup
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1

@@ -227,7 +227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7914017180585270055
 Transform:
   m_ObjectHideFlags: 0
@@ -278,15 +278,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ff41f10e4b5c34f9c9d137139a4839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamagePerSecond: 0
+  DamagePerSecond: 0.1
   DamageType: 3
-  AmmoPerSecond: 10
   _shape: {fileID: 5120690382185375993}
+  _particles: {fileID: 2987794373132298335}
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
   _buildupTime_seconds: 1
   _fadeTime_seconds: 0.5
+  AmmoPerSecond: 10
   _triggerKey: 323
-  _particles: {fileID: 2987794373132298335}
-  _intensity: 0
 --- !u!1001 &56814355806736291
 PrefabInstance:
   m_ObjectHideFlags: 0

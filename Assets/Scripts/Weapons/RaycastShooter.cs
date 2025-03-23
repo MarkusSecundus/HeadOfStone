@@ -22,6 +22,7 @@ public class RaycastShooter : MonoBehaviour
     [SerializeField] AttackPathDeclaration[] _attackPaths;
 
     [SerializeField] UnityEvent OnAttack;
+    [SerializeField] UnityEvent OnAttackOutOfAmmo;
 
     [SerializeField] KeyCode KeyToShoot = KeyCode.Mouse0;
     IInputProvider<InputAxis> input;
@@ -46,7 +47,10 @@ public class RaycastShooter : MonoBehaviour
         _nextPermittedShotTime = Time.timeAsDouble + _cooldown_seconds;
 
         if (!_weaponDescriptor.AddAmmo(-1))
+        {
+            OnAttackOutOfAmmo?.Invoke();
             return;
+        }
 
         var damagePerVictim = new DefaultValDict<IArmorPiece, float>(v => 0f);
         foreach(var attackPath in _attackPaths)

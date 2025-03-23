@@ -9,5 +9,8 @@ public class DummyArmor : MonoBehaviour, IArmorPiece
 
     public void Attack(AttackDeclaration attackDeclaration) {}
 
-    public override bool Equals(object other) => other == null || base.Equals(other);
+    public override bool Equals(object other) => ReferenceEquals(this, null) || ReferenceEquals(this, other) || base.Equals(other);
+
+    // Override just to silence the warnings
+    public override int GetHashCode() => base.GetHashCode();
 }

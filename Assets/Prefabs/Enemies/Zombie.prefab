@@ -359,10 +359,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnAttackSignal:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2143023184408997357}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeathSignal:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7255033597957828364}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 676184305757382294}
         m_TargetAssemblyTypeName: Assets.Scripts.Utils.SimpleBehaviors.GameObjects.LifetimeHelper,
           Assembly-CSharp
@@ -405,6 +429,7 @@ GameObject:
   - component: {fileID: 1691529346173954456}
   - component: {fileID: 887345615592708841}
   - component: {fileID: 676184305757382294}
+  - component: {fileID: 1979716406081503038}
   m_Layer: 10
   m_Name: Zombie
   m_TagString: Untagged
@@ -429,6 +454,7 @@ Transform:
   - {fileID: 1722093975647854554}
   - {fileID: 1488358430337966245}
   - {fileID: 2233820925792326069}
+  - {fileID: 6446901814631932644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6414186624529249824
@@ -515,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7d3b2e3e4271141a0a8c0f18fa37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DistanceToAttack: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls:
@@ -560,10 +587,34 @@ MonoBehaviour:
   <HP>k__BackingField: 0
   OnUpdate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9100848672951507908}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayRenewed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.7
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDamaged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4368333199188196915}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.7
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHealed:
     m_PersistentCalls:
       m_Calls: []
@@ -627,6 +678,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b504d05487a4934383c3617ba8c7669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1979716406081503038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695580723216659741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64535961a861234da7be2b9ed248b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9100848672951507908}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: StartPlaying
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9100848672951507908}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3745283609531962964
 GameObject:
   m_ObjectHideFlags: 0
@@ -5884,6 +5980,157 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4489723936955992331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5228434215994728770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6446901814631932644}
+  - component: {fileID: 9100848672951507908}
+  - component: {fileID: 4368333199188196915}
+  - component: {fileID: 7255033597957828364}
+  - component: {fileID: 2143023184408997357}
+  m_Layer: 10
+  m_Name: Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6446901814631932644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5228434215994728770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5356117818319033904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9100848672951507908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5228434215994728770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: 485799834
+      Data2: 1250337626
+      Data3: 730743996
+      Data4: -2089974079
+    Path: event:/Sounds/Enemies/Zombie/Idle
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &4368333199188196915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5228434215994728770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: -505633008
+      Data2: 1136686566
+      Data3: -463620455
+      Data4: 911297229
+    Path: event:/Sounds/Enemies/Zombie/Hurt
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &7255033597957828364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5228434215994728770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: -2031614259
+      Data2: 1294622252
+      Data3: -1378160254
+      Data4: 1197081377
+    Path: event:/Sounds/Enemies/Zombie/Die
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
+--- !u!114 &2143023184408997357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5228434215994728770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: 1231269552
+      Data2: 1338394874
+      Data3: -157066596
+      Data4: -1483089370
+    Path: event:/Sounds/Enemies/Zombie/Attack
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
 --- !u!1 &5362750365693325219
 GameObject:
   m_ObjectHideFlags: 0

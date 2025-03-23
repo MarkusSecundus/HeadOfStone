@@ -1,4 +1,5 @@
 using MarkusSecundus.Utils.Behaviors.Automatization;
+using MarkusSecundus.Utils.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] SpawnEntry[] Spawns;
 
     [SerializeField] UnityEvent<int> OnWaveStart;
+
+    [SerializeField] SerializableDictionary<int, UnityEvent<int>> OnSpecificWaveStart;
 
     [System.Serializable]
     public struct SpawnEntry
@@ -44,6 +47,7 @@ public class WaveManager : MonoBehaviour
             Spawns[t] = spawn;
         }
         OnWaveStart?.Invoke(CurrentWave);
+        if (OnSpecificWaveStart.TryGetValue(CurrentWave, out var onWaveCallback)) onWaveCallback?.Invoke(CurrentWave);
     }
 
 }

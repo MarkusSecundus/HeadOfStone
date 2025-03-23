@@ -93,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3270358145578661806}
   - component: {fileID: 7794235317836579228}
-  - component: {fileID: 6268106285874430790}
+  - component: {fileID: 496335085461479213}
+  - component: {fileID: 6136256319136325976}
   m_Layer: 0
   m_Name: Gunpowder
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7311170459052233849}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.291, y: 0, z: 0.13000011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -139,7 +140,7 @@ MonoBehaviour:
   OnStateUpdated:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6268106285874430790
+--- !u!114 &496335085461479213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,15 +149,62 @@ MonoBehaviour:
   m_GameObject: {fileID: 7311170459052233849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc5fc571c279581429b83e0679a5e094, type: 3}
+  m_Script: {fileID: 11500000, guid: e80c686232653d644b7028a12109c4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShootForce: 0
-  Cooldown_seconds: 0.1
+  Cooldown_seconds: 0
   MaxProjectilesInExistence: -1
   ShootDirection: {fileID: 0}
   BulletPrototype: {fileID: 7893651181693295174}
-  KeyToShoot: 323
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6136256319136325976}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.25
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnAttackOutOfAmmo:
+    m_PersistentCalls:
+      m_Calls: []
+  <ShouldShoot>k__BackingField: 1
+--- !u!114 &6136256319136325976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7311170459052233849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: -682791177
+      Data2: 1116292583
+      Data3: -1894329939
+      Data4: -760756188
+    Path: event:/Sounds/Dwarf/Weapons/Gunpowder_Place
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1
 --- !u!1001 &1987793175311521278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,12 +221,12 @@ PrefabInstance:
     - target: {fileID: 581707743733108991, guid: 1902920976bf5814dbc427c8a9a7cda1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05700004
+      value: -0.52
       objectReference: {fileID: 0}
     - target: {fileID: 581707743733108991, guid: 1902920976bf5814dbc427c8a9a7cda1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3000002
+      value: -0.82
       objectReference: {fileID: 0}
     - target: {fileID: 581707743733108991, guid: 1902920976bf5814dbc427c8a9a7cda1,
         type: 3}
@@ -219,11 +267,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunpowder
-      objectReference: {fileID: 0}
-    - target: {fileID: 9088806467273694769, guid: 1902920976bf5814dbc427c8a9a7cda1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

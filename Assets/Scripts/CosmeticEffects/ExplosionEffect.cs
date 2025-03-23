@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class ExplosionEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem ExplosionParticles;
+    [SerializeField] UnityEvent OnExplosionStart;
     [SerializeField] UnityEvent OnExplosion;
     [SerializeField] float UntilExplosionCallback_seconds = 0.5f;
     [SerializeField] Renderer ExplosionMesh;
@@ -23,6 +24,7 @@ public class ExplosionEffect : MonoBehaviour
 
         if(ToTint) ToTint.material.DOColor(ExplosionColorTint, TintDuration_seconds);
 
+        OnExplosionStart?.Invoke();
         this.InvokeWithDelay(() => OnExplosion?.Invoke(), UntilExplosionCallback_seconds);
         if (ExplosionMesh)
         {

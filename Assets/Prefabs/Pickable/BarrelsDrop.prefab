@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2075601313477649}
   - component: {fileID: 6914400401190098949}
   - component: {fileID: 6413505637600895720}
+  - component: {fileID: 2372869775031476409}
   m_Layer: 0
   m_Name: BarrelsDrop
   m_TagString: Untagged
@@ -166,5 +167,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7015f3e745b7ab2419f59cc80132d87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2372869775031476409}
+        m_TargetAssemblyTypeName: FmodSoundPlayer, MainAssembly
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _weapon: 3
   _ammoCount: 2
+--- !u!114 &2372869775031476409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688086257841170374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510bed43d1f0c1419926063e0b9af6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    Guid:
+      Data1: 48236286
+      Data2: 1139858765
+      Data3: 565947031
+      Data4: 304890976
+    Path: event:/Sounds/Dwarf/Weapons/Ammo_Pickup
+  _advanced:
+    DefaultStopMode: 0
+    PropertiesOnStartup:
+      values: []
+    PlayOnStart: 0
+    InitOnStart: 0
+    InitialVolume: 1
+    VolumeChangeSpeed: 0
+    VolumeTargetGrowth: 0
+  _currentVolume: 1

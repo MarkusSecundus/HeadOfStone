@@ -6,6 +6,7 @@ using MarkusSecundus.Utils.Primitives;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationInertia = 1f;
     [SerializeField] Vector3 gravity = new Vector3(0, -9.81f, 0);
     [SerializeField] Transform bodyToRotate;
+
+    [SerializeField] UnityEvent OnWalking;
 
     IInputProvider<InputAxis> input;
     CharacterController controller;
@@ -49,7 +52,9 @@ public class PlayerController : MonoBehaviour
         else
             _gravitationalVelocity += gravity * delta;
 
-        _movementVelocity.ClampMagnitude(0f, movementSpeed);
+        _movementVelocity = _movementVelocity.ClampMagnitude(0f, movementSpeed);
+        if (_movementVelocity.sqrMagnitude > (movementSpeed * 0.1f))
+            OnWalking?.Invoke();
         controller.Move(_totalVelocity * delta);
     }
     void RotationUpdate(Quaternion? newTargetRotation, float delta)
