@@ -78,7 +78,7 @@ public class FmodSoundPlayer : MonoBehaviour
         MakeSureIsInitialized();
         if (_currentInstance.isPlaying())
         {
-            Debug.LogWarning($"{_sound.Path} is already playing!", this);
+            Debug.LogWarning($"{_sound} is already playing!", this);
             return;
         }
         _currentInstance.setTimelinePosition(0);
