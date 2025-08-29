@@ -30,7 +30,7 @@ namespace Assets.Scripts.DamageSystem
             _armorPieceCache.Add(o, ret);
             return ret;
         }
-        public static IArmorPiece Get(Collider c) => Get(c.gameObject);
+        public static IArmorPiece Get(Component c) => Get(c.gameObject);
 
         public void Attack(AttackDeclaration attackDeclaration);
 

@@ -36,14 +36,14 @@ public abstract class ContinuousShapecastShooterBase : MonoBehaviour
 
     record ShapeListener(ContinuousShapecastShooterBase Base) : IColliderActivityInfo
     {
-        public void Enter(Collider other)
+        public void Enter(Component other)
         {
             IArmorPiece armor = IArmorPiece.Get(other);
             if (armor.IsNil() || armor.Damageable.IsNil()) return;
             Base._affectedDamageables[armor.Damageable].Add(armor);
         }
 
-        public void Exit(Collider other)
+        public void Exit(Component other)
         {
             IArmorPiece armor = IArmorPiece.Get(other);
             if (armor.IsNil() || armor.Damageable.IsNil()) return;
